@@ -1,27 +1,17 @@
-import React, { Component } from 'react';
-// import Api from './marta/api';
 import StationList from './StationList/StationList';
+import StationView from './StationView/StationView';
 import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stations: {}
-    };
-  }
-
-
-  render() {
-    return (
-      <div className="App">
-        <header>
-          <h1>marta.io</h1>
-        </header>
-        <StationList />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <div>
+      <h1>marta.io</h1>
+      <Route exact path="/" component={StationList} />
+      <Route path="/station/:station" component={StationView} />
+    </div>
+  </Router>
+);
 
 export default App;

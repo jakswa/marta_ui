@@ -4,15 +4,12 @@ class Api {
   static subscriptions = [];
   static arrivals = null;
   static intervalID = null;
-  static TRAINS_URL = 'http://salty-brushlands-11905.herokuapp.com/api/trains';
+  static TRAINS_URL = '//salty-brushlands-11905.herokuapp.com/api/trains';
 
   static subscribe(callback) {
     if(this.subscriptions.indexOf(callback) === -1) {
       this.subscriptions.push(callback);
       if(this.subscriptions.length === 1) {
-        this.intervalID = setInterval(() => {
-          this.fetchTrains();
-        }, 11000);
         this.fetchTrains();
       }
     }
@@ -28,7 +25,7 @@ class Api {
     if (ind === -1) return;
     this.subscriptions.splice(ind, 1);
     if(this.subscriptions.length === 0) {
-      clearInterval(this.intervalID);
+      clearTimeout(this.timeoutID);
     }
   }
 
@@ -61,6 +58,9 @@ class Api {
       });
     // this.arrivalsByStation = stub;
     // this.fireSubs();
+    this.timeoutID = setTimeout(() => {
+      this.fetchTrains();
+    }, 11000);
   }
 
   static fireSubs() {

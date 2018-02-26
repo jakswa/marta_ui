@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Api from '../marta/api';
 import Stations from '../marta/stations';
 import StationPills from '../StationPills/StationPills';
+import { Link } from 'react-router-dom';
 import './StationList.css';
 
 class StationList extends Component {
@@ -30,8 +31,11 @@ class StationList extends Component {
 
       list.push(
         <li key={stationName}>
-          {stationName}
-          {this.renderPills(arrivalData)}
+
+          <Link to={"/station/" + stationName.replace(/ /g, '-')}>
+            {stationName}
+            {this.renderPills(arrivalData)}
+          </Link>
         </li>
       );
     }
