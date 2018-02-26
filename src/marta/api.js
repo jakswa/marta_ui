@@ -1,49 +1,71 @@
+// const stub = require("./arrivals_stub.json");
+
 class Api {
-  static subs = [];
+  static subscriptions = [];
   static arrivals = null;
-  static lastRequest = null;
-  static AGE = 10000;
+  static intervalID = null;
   static TRAINS_URL = 'http://salty-brushlands-11905.herokuapp.com/api/trains';
 
   static subscribe(callback) {
-    this.subs.push(callback);
-    if (this.arrivals) {
-      callback(this.arrivals);
+    if(this.subscriptions.indexOf(callback) === -1) {
+      this.subscriptions.push(callback);
+      if(this.subscriptions.length === 1) {
+        this.intervalID = setInterval(() => {
+          this.fetchTrains();
+        }, 11000);
+        this.fetchTrains();
+      }
+    }
+
+    // initial fire, if already cached
+    if(this.arrivalsByStation) {
+      callback(this.arrivalsByStation);
     }
   }
 
   static unsubscribe(callback) {
-    let index = this.subs.indexOf(callback);
-    if(index === -1) return;
-    this.subs.splice(index,1);
+    var ind = this.subscriptions.indexOf(callback);
+    if (ind === -1) return;
+    this.subscriptions.splice(ind, 1);
+    if(this.subscriptions.length === 0) {
+      clearInterval(this.intervalID);
+    }
   }
 
-  static start() {
-    this.started = true;
-    this.fetchTrains();
-    setInterval(() => {
-      this.fetchTrains();
-    }, this.AGE);
-  }
-
-  static request(url) {
-    return fetch(url);
+  static byStation(arrivals) {
+    var byStation = {};
+    for(let i = 0; i < arrivals.length; i++) {
+      var arr = arrivals[i];
+      var station = byStation[arr.STATION];
+      if (!station) {
+        station = byStation[arr.STATION] = {};
+      }
+      if (!station[arr.DIRECTION]) {
+        station[arr.DIRECTION] = {
+          time: arr.WAITING_SECONDS,
+          id: arr.TRAIN_ID,
+          line: arr.LINE
+        };
+      }
+    }
+    return byStation;
   }
 
   static fetchTrains() {
-    this.request(this.TRAINS_URL)
+    fetch(this.TRAINS_URL)
       .then(res => res.json())
       .then(list => {
-        this.subs.forEach((s) => s(list));
-      }).catch(err => {
-        console.log("ERRORRR:", err.message);
+        this.arrivals = list;
+        this.arrivalsByStation = this.byStation(list);
+        this.fireSubs();
       });
+    // this.arrivalsByStation = stub;
+    // this.fireSubs();
   }
-}
 
-// TODO: figure this out...
-if (process.env.NODE_ENV !== 'test') {
-  Api.start();
+  static fireSubs() {
+    this.subscriptions.forEach((sub) => sub(this.arrivalsByStation));
+  }
 }
 
 export default Api;
