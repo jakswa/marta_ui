@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import Api from '../marta/api';
 import Stations from '../marta/stations';
 import StationPills from '../StationPills/StationPills';
+import Location from '../location';
 import { Link } from 'react-router-dom';
+import Marta from '../marta';
 import './StationList.css';
 
 class StationList extends Component {
   static arrivals = {};
   constructor(props) {
     super(props);
-    this.state = { stationNames: Stations.NAMES.slice(0) };
+    this.state = {
+      stationNames: Stations.NAMES.slice(0),
+      location: Location.cachedLocation()
+    };
     this.subscribeCallback = (arrivals) => {
       this.setState({ arrivals: StationList.byStation(arrivals) });
     };
@@ -42,15 +47,57 @@ class StationList extends Component {
     Api.unsubscribe(this.subscribeCallback);
   }
 
+  // On first prompt, this requires user interaction to successfully ask the user.
+  // After they click 'yes', you can request this on page load and get the location.
+  getLocation() {
+    Location.getLocation().then((coords) => {
+      this.setState({
+        location: { latitude: coords.latitude, longitude: coords.longitude }
+      });
+    }).catch((err) => {
+      this.setState({ locFailed: true });
+      console.log("error getting location:", err.message);
+    });
+  }
+
   render() {
     var list = [];
-    for(var i = 0; i < this.state.stationNames.length; i++) {
-      var stationName = this.state.stationNames[i];
-      var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
+
+    if(!this.state.location && !this.state.locFailed) {
+      list.push(
+        <li key="locReq">
+          <a onClick={this.getLocation.bind(this)}>Show nearest 3 stations?</a>
+        </li>
+      );
+    }
+
+    if(this.state.location) {
+      var nearest = Marta.stationsNearest(
+        this.state.location.latitude,
+        this.state.location.longitude
+      );
+
+      for(var i = 0; i < 3; i++) {
+        var stationName = nearest[i];
+        var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
+        list.push(
+          <li key={"loc-" + stationName}>
+            <Link to={"/station/" + stationName.replace(/ /g, '-')}>
+              {stationName}
+              {this.renderPills(arrivalData)}
+            </Link>
+          </li>
+        );
+      }
+      list.push(<hr key="divider" />);
+    }
+
+    for(i = 0; i < this.state.stationNames.length; i++) {
+      stationName = this.state.stationNames[i];
+      arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
 
       list.push(
         <li key={stationName}>
-
           <Link to={"/station/" + stationName.replace(/ /g, '-')}>
             {stationName}
             {this.renderPills(arrivalData)}

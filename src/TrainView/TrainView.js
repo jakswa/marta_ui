@@ -41,7 +41,7 @@ class StationView extends Component {
     for(var i = 0; i < this.state.arrivals.length; i++) {
       var arrival = this.state.arrivals[i];
       res.push(
-        <li className={arrival.LINE} key={arrival.TRAIN_ID}>
+        <li className={arrival.LINE} key={arrival.STATION}>
           {arrival.STATION.toLowerCase()} {arrival.WAITING_TIME}
         </li>
       );
