@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './StationPills.css';
+import { Chip, Avatar } from 'material-ui';
 
 class StationPills extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class StationPills extends Component {
   }
 
   render() {
-    return <span className={"StationPills " + this.state.line}>{this.state.dir}{this.state.time}</span>;
+    var className = this.state.line + 'Line Pill';
+    return <Chip classes={{root: className}} avatar={<Avatar>{this.state.dir}</Avatar>} label={':' + Math.ceil(this.state.time / 60)} />;
   }
 }
 

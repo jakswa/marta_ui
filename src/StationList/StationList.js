@@ -6,9 +6,11 @@ import Location from '../location';
 import { Link } from 'react-router-dom';
 import Marta from '../marta';
 import './StationList.css';
+import { Button, AppBar, Toolbar, Typography, List, ListItem, ListItemText, ListSubheader } from 'material-ui';
 
 class StationList extends Component {
   static arrivals = {};
+  static dirs = ['N', 'S', 'W', 'E'];
   constructor(props) {
     super(props);
     this.state = {
@@ -65,9 +67,9 @@ class StationList extends Component {
 
     if(!this.state.location && !this.state.locFailed) {
       list.push(
-        <li key="locReq">
-          <a onClick={this.getLocation.bind(this)}>Show nearest 3 stations?</a>
-        </li>
+        <ListItem button key="locReq" onClick={this.getLocation.bind(this)} >
+          <ListItemText primary="Show nearest 3 stations?" />
+        </ListItem>
       );
     }
 
@@ -77,46 +79,53 @@ class StationList extends Component {
         this.state.location.longitude
       );
 
+      list.push(<ListSubheader key="nearHead" disableSticky>Nearest Stations</ListSubheader>);
       for(var i = 0; i < 3; i++) {
         var stationName = nearest[i];
         var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
         list.push(
-          <li key={"loc-" + stationName}>
-            <Link to={"/station/" + stationName.replace(/ /g, '-')}>
-              {stationName}
-              {this.renderPills(arrivalData)}
-            </Link>
-          </li>
+          <ListItem divider key={"loc-" + stationName} component={Link} to={"/station/" + stationName.replace(/ /g, '-')}>
+            <ListItemText primary={stationName} />
+            {this.renderPills(arrivalData)}
+          </ListItem>
         );
       }
-      list.push(<hr key="divider" />);
     }
 
+    list.push(<ListSubheader key="allHead" disableSticky>All Stations</ListSubheader>);
     for(i = 0; i < this.state.stationNames.length; i++) {
       stationName = this.state.stationNames[i];
       arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
 
       list.push(
-        <li key={stationName}>
-          <Link to={"/station/" + stationName.replace(/ /g, '-')}>
-            {stationName}
-            {this.renderPills(arrivalData)}
-          </Link>
-        </li>
+        <ListItem divider key={stationName} button component={Link} to={"/station/" + stationName.replace(/ /g, '-')}>
+          <ListItemText primary={stationName} />
+          {this.renderPills(arrivalData)}
+        </ListItem>
       );
     }
+    // TODO test out 'dense' on the List, when we get chips in
     return (
       <div>
-        <h1>Stations</h1>
-        <ul className="StationList">{list}</ul>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              Stations
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <List className="StationList">{list}</List>
       </div>
     );
   }
 
   renderPills(arrivalData) {
+    if (!arrivalData) return;
     var res = [];
-    for(var dir in arrivalData) {
+    for(var i = 0; i < 4; i++) {
+      var dir = StationList.dirs[i];
       var d = arrivalData[dir];
+      if (!d) continue;
       res.push(<StationPills key={dir + d.line} dir={dir} time={d.time} line={d.line} />);
     }
     return res;
