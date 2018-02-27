@@ -1,4 +1,4 @@
-// const stub = require("./arrivals_stub.json");
+const stub = require("./arrivals.json");
 
 class Api {
   static subscriptions = [];
@@ -29,42 +29,22 @@ class Api {
     }
   }
 
-  static byStation(arrivals) {
-    var byStation = {};
-    for(let i = 0; i < arrivals.length; i++) {
-      var arr = arrivals[i];
-      var station = byStation[arr.STATION];
-      if (!station) {
-        station = byStation[arr.STATION] = {};
-      }
-      if (!station[arr.DIRECTION]) {
-        station[arr.DIRECTION] = {
-          time: arr.WAITING_SECONDS,
-          id: arr.TRAIN_ID,
-          line: arr.LINE
-        };
-      }
-    }
-    return byStation;
-  }
-
   static fetchTrains() {
-    fetch(this.TRAINS_URL)
-      .then(res => res.json())
-      .then(list => {
-        this.arrivals = list;
-        this.arrivalsByStation = this.byStation(list);
-        this.fireSubs();
-      });
-    // this.arrivalsByStation = stub;
-    // this.fireSubs();
+    // fetch(this.TRAINS_URL)
+    //   .then(res => res.json())
+    //   .then(list => {
+    //     this.arrivals = list;
+    //     this.fireSubs();
+    //   });
+    this.arrivals = stub;
+    this.fireSubs();
     this.timeoutID = setTimeout(() => {
       this.fetchTrains();
     }, 11000);
   }
 
   static fireSubs() {
-    this.subscriptions.forEach((sub) => sub(this.arrivalsByStation));
+    this.subscriptions.forEach((sub) => sub(this.arrivals));
   }
 }
 

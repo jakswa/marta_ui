@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import Api from '../marta/api';
-import { Link } from 'react-router-dom';
 
 class StationView extends Component {
   constructor(props) {
     super(props);
-    var name = this.props.match.params.station.replace(/-/g, " ");
     this.state = {
-      stationName: name,
-      upperStationName: name.toUpperCase(),
+      trainID: props.match.params.train_id,
       arrivals: []
     };
   }
@@ -19,7 +16,7 @@ class StationView extends Component {
       var matching = []
       for(var i = 0; i < arrivals.length; i++) {
         var arrival = arrivals[i];
-        if(arrival.STATION === this.state.upperStationName) {
+        if(arrival.TRAIN_ID === this.state.trainID) {
           matching.push(arrival);
         }
       }
@@ -33,8 +30,8 @@ class StationView extends Component {
   }
 
   render() {
-    return <div className="StationView">
-             <h1>{this.state.stationName}</h1>
+    return <div className="TrainView">
+             <h2>Train {this.state.trainID} {this.arrivals[0] && this.arrivals[0].DIRECTION}</h2>
              <ul>{this.arrivals()}</ul>
            </div>;
   }
@@ -45,9 +42,7 @@ class StationView extends Component {
       var arrival = this.state.arrivals[i];
       res.push(
         <li className={arrival.LINE} key={arrival.TRAIN_ID}>
-          <Link to={"/train/" + arrival.TRAIN_ID}>
-            {arrival.DIRECTION} {arrival.WAITING_TIME}
-          </Link>
+          {arrival.STATION.toLowerCase()} {arrival.WAITING_TIME}
         </li>
       );
     }

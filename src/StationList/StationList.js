@@ -10,9 +10,28 @@ class StationList extends Component {
   constructor(props) {
     super(props);
     this.state = { stationNames: Stations.NAMES.slice(0) };
-    this.subscribeCallback = (arrivalsByStation) => {
-      this.setState({ arrivals: arrivalsByStation });
+    this.subscribeCallback = (arrivals) => {
+      this.setState({ arrivals: StationList.byStation(arrivals) });
     };
+  }
+
+  static byStation(arrivals) {
+    var byStation = {};
+    for(let i = 0; i < arrivals.length; i++) {
+      var arr = arrivals[i];
+      var station = byStation[arr.STATION];
+      if (!station) {
+        station = byStation[arr.STATION] = {};
+      }
+      if (!station[arr.DIRECTION]) {
+        station[arr.DIRECTION] = {
+          time: arr.WAITING_SECONDS,
+          id: arr.TRAIN_ID,
+          line: arr.LINE
+        };
+      }
+    }
+    return byStation;
   }
 
   componentDidMount() {
