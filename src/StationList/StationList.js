@@ -105,7 +105,12 @@ class StationList extends Component {
         </li>
       );
     }
-    return <ul className="StationList">{list}</ul>;
+    return (
+      <div>
+        <h1>Stations</h1>
+        <ul className="StationList">{list}</ul>
+      </div>
+    );
   }
 
   renderPills(arrivalData) {

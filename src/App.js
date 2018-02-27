@@ -8,7 +8,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 const App = () => (
   <Router>
     <div>
-      <h1>marta.io</h1>
       <Route exact path="/" component={StationList} />
       <Route path="/station/:station" component={StationView} />
       <Route path="/train/:train_id" component={TrainView} />

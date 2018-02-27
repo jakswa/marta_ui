@@ -31,7 +31,7 @@ class StationView extends Component {
 
   render() {
     return <div className="TrainView">
-             <h2>Train {this.state.trainID} {this.arrivals[0] && this.arrivals[0].DIRECTION}</h2>
+             <h2>Train {this.state.trainID}</h2>
              <ul>{this.arrivals()}</ul>
            </div>;
   }
