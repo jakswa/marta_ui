@@ -7,6 +7,7 @@ import Avatar from 'material-ui/Avatar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import List, { ListItem, ListItemText } from 'material-ui/List';
+import "./StationView.css";
 
 class StationView extends Component {
   constructor(props) {

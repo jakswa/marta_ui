@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import Api from '../marta/api';
+import AppBar from 'material-ui/AppBar';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 
 class StationView extends Component {
   constructor(props) {
@@ -30,20 +36,30 @@ class StationView extends Component {
   }
 
   render() {
-    return <div className="TrainView">
-             <h2>Train {this.state.trainID}</h2>
-             <ul>{this.arrivals()}</ul>
-           </div>;
+    return (
+      <div className="TrainView">
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              Train ID {this.state.trainID}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <List>{this.arrivals()}</List>
+      </div>
+    )
   }
 
   arrivals() {
     var res = [];
     for(var i = 0; i < this.state.arrivals.length; i++) {
       var arrival = this.state.arrivals[i];
+      var className = arrival.LINE + "Line";
       res.push(
-        <li className={arrival.LINE} key={arrival.STATION}>
-          {arrival.STATION.toLowerCase()} {arrival.WAITING_TIME}
-        </li>
+        <ListItem divider key={arrival.STATION}>
+          <Chip classes={{ root: className }}  avatar={<Avatar>{arrival.DIRECTION}</Avatar>} label={arrival.STATION.replace(/ station$/i, '')} />
+          <ListItemText primary={arrival.WAITING_TIME} />
+        </ListItem>
       );
     }
     return res;

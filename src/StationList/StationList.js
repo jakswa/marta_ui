@@ -88,7 +88,7 @@ class StationList extends Component {
         var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
         list.push(
           <ListItem divider key={"loc-" + stationName} component={Link} to={"/station/" + stationName.replace(/ /g, '-')}>
-            <ListItemText primary={stationName} />
+            <ListItemText primary={stationName.replace(/ station$/i, '')} />
             {this.renderPills(arrivalData)}
           </ListItem>
         );
@@ -102,14 +102,14 @@ class StationList extends Component {
 
       list.push(
         <ListItem divider key={stationName} button component={Link} to={"/station/" + stationName.replace(/ /g, '-')}>
-          <ListItemText primary={stationName} />
+          <ListItemText primary={stationName.replace(/ station$/i, '')} />
           {this.renderPills(arrivalData)}
         </ListItem>
       );
     }
     // TODO test out 'dense' on the List, when we get chips in
     return (
-      <div>
+      <div className="StationList">
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="title" color="inherit">

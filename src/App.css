@@ -4,25 +4,29 @@ body {
 
 div.Pill {
   margin-left: 5px;
+  font-weight: 500;
+  font-family: monospace;
+}
+
+div.Pill span {
+  font-weight: bold;
+  font-size: 1rem;
+  padding-left: 6px;
 }
 
 body div.GOLDLine div {
-  font-weight: 500;
   background-color: #ffa700;
   color: white;
 }
 body div.REDLine div {
-  font-weight: 500;
   background-color: #ff5100;
   color: white;
 }
 body div.GREENLine div {
-  font-weight: 500;
   background-color: green;
   color: white;
 }
 body div.BLUELine div {
-  font-weight: 500;
   background-color: #30a7fa;
   color: white;
 }

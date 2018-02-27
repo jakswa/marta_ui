@@ -1,4 +1,4 @@
-const stub = require("./arrivals_stub.json");
+// const stub = require("./arrivals_stub.json");
 
 class Api {
   static subscriptions = [];
@@ -29,14 +29,14 @@ class Api {
   }
 
   static fetchTrains() {
-    // fetch(this.TRAINS_URL)
-    //   .then(res => res.json())
-    //   .then(list => {
-    //     this.arrivals = list;
-    //     this.fireSubs();
-    //   });
-    this.arrivals = stub;
-    this.fireSubs();
+    fetch(this.TRAINS_URL)
+      .then(res => res.json())
+      .then(list => {
+        this.arrivals = list;
+        this.fireSubs();
+      });
+    // this.arrivals = stub;
+    // this.fireSubs();
 
     this.timeoutID = setTimeout(() => {
       this.fetchTrains();
