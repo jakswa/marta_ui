@@ -8,6 +8,9 @@ import Marta from '../marta';
 import './StationList.css';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
+import Button from 'material-ui/Button';
+import Hidden from 'material-ui/Hidden';
+import { LinearProgress, CircularProgress } from 'material-ui/Progress';
 import Typography from 'material-ui/Typography';
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 
@@ -55,12 +58,17 @@ class StationList extends Component {
   // On first prompt, this requires user interaction to successfully ask the user.
   // After they click 'yes', you can request this on page load and get the location.
   getLocation() {
+    this.setState({ locationLoading: true });
     Location.getLocation().then((coords) => {
       this.setState({
-        location: { latitude: coords.latitude, longitude: coords.longitude }
+        location: { latitude: coords.latitude, longitude: coords.longitude },
+        locationLoading: false
       });
     }).catch((err) => {
-      this.setState({ locFailed: true });
+      this.setState({
+        locFailed: true,
+        locationLoading: false
+      });
       console.log("error getting location:", err.message);
     });
   }
@@ -70,8 +78,13 @@ class StationList extends Component {
 
     if(!this.state.location && !this.state.locFailed) {
       list.push(
-        <ListItem button key="locReq" onClick={this.getLocation.bind(this)} >
-          <ListItemText primary="Show nearest 3 stations?" />
+        <ListItem key="locReq">
+          <Button onClick={this.getLocation.bind(this)} disabled={this.state.locationLoading} variant="raised" size="small" color="primary">
+            Show Nearest Stations 
+            <Hidden xsUp={!this.state.locationLoading}>
+              <CircularProgress size={20} />
+            </Hidden>
+          </Button>
         </ListItem>
       );
     }
@@ -117,6 +130,7 @@ class StationList extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
+        <Hidden xsUp={this.state.arrivals}><LinearProgress /> </Hidden>
         <List className="StationList">{list}</List>
       </div>
     );
