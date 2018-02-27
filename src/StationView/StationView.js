@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Api from '../marta/api';
 import { Link } from 'react-router-dom';
+import AppBar from 'material-ui/AppBar';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 
 class StationView extends Component {
   constructor(props) {
@@ -14,7 +20,6 @@ class StationView extends Component {
   }
 
   componentDidMount() {
-    // TODO: need more than just next two arrivals
     this.subscribeCallback = (arrivals) => {
       var matching = []
       for(var i = 0; i < arrivals.length; i++) {
@@ -33,22 +38,30 @@ class StationView extends Component {
   }
 
   render() {
-    return <div className="StationView">
-             <h1>{this.state.stationName}</h1>
-             <ul>{this.arrivals()}</ul>
-           </div>;
+    return (
+      <div className="StationView">
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              {this.state.stationName}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <List>{this.arrivals()}</List>
+      </div>
+    )
   }
 
   arrivals() {
     var res = [];
     for(var i = 0; i < this.state.arrivals.length; i++) {
       var arrival = this.state.arrivals[i];
+      var className = arrival.LINE + "Line";
       res.push(
-        <li className={arrival.LINE} key={arrival.TRAIN_ID}>
-          <Link to={"/train/" + arrival.TRAIN_ID}>
-            {arrival.DIRECTION} {arrival.WAITING_TIME}
-          </Link>
-        </li>
+        <ListItem divider key={arrival.TRAIN_ID} component={Link} to={"/train/" + arrival.TRAIN_ID}>
+          <Chip classes={{ root: className }}  avatar={<Avatar>{arrival.DIRECTION}</Avatar>} label={arrival.DESTINATION} />
+          <ListItemText primary={arrival.WAITING_TIME} />
+        </ListItem>
       );
     }
     return res;

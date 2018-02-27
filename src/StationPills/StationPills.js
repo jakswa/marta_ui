@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './StationPills.css';
-import { Chip, Avatar } from 'material-ui';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
 
 class StationPills extends Component {
   constructor(props) {

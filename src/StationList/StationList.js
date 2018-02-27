@@ -6,7 +6,10 @@ import Location from '../location';
 import { Link } from 'react-router-dom';
 import Marta from '../marta';
 import './StationList.css';
-import { Button, AppBar, Toolbar, Typography, List, ListItem, ListItemText, ListSubheader } from 'material-ui';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 
 class StationList extends Component {
   static arrivals = {};

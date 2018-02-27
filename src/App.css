@@ -6,7 +6,7 @@ div.Pill {
   margin-left: 5px;
 }
 
-div.GOLDLine div {
+body div.GOLDLine div {
   font-weight: 500;
   background-color: #ffa700;
   color: white;
