@@ -3,6 +3,8 @@
 The static front-end for marta.io, currently running
 on: https://beta.marta.io
 
+![beta_marta_io](https://user-images.githubusercontent.com/137793/36806617-90d660b2-1c8e-11e8-8e38-6e4327a9458a.png)
+
 ## Setup
 
 0. Install NodeJS if you haven't.
