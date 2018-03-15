@@ -1,10 +1,10 @@
 export default class Location {
   static locationAvailable() {
-    return !!window.localStorage.getItem("locationSuccess");
+    return !!window.sessionStorage.getItem("locationSuccess");
   }
 
   static cachedLocation() {
-    var cached = window.localStorage.getItem("locationSuccess");
+    var cached = window.sessionStorage.getItem("locationSuccess");
     if (cached) {
       return JSON.parse(cached);
     }
@@ -19,7 +19,7 @@ export default class Location {
       }
       window.navigator.geolocation.getCurrentPosition((loc) => {
         cached = JSON.stringify({ latitude: loc.coords.latitude, longitude: loc.coords.longitude })
-        window.localStorage.setItem("locationSuccess", cached);
+        window.sessionStorage.setItem("locationSuccess", cached);
         resolve(loc.coords);
       }, (err) => {
         reject(err);
