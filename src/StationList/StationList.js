@@ -5,7 +5,6 @@ import StationPills from '../StationPills/StationPills';
 import Location from '../location';
 import { Link } from 'react-router-dom';
 import Marta from '../marta';
-import './StationList.css';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';

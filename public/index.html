@@ -21,6 +21,65 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>marta.io</title>
+
+    <!--
+      these used to be in components, but there's so little CSS
+      that I can't justify a whole HTTP request just to load this little bit
+    --> 
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif
+      }
+
+      .StationList h3 {
+        text-transform: capitalize;
+        white-space: nowrap;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis
+      }
+
+      .StationView h2 {
+        text-transform: capitalize
+      }
+
+      body {
+        font-family: Roboto,Open Sans,Droid,Ubuntu,sans-serif
+      }
+
+      div.Pill {
+        margin-left: 5px;
+        font-weight: 500;
+        font-family: monospace
+      }
+
+      div.Pill span {
+        font-weight: 700;
+        font-size: 1rem;
+        padding-left: 6px
+      }
+
+      body div.GOLDLine div {
+        background-color: #ffa700;
+        color: #fff
+      }
+
+      body div.REDLine div {
+        background-color: #ff5100;
+        color: #fff
+      }
+
+      body div.GREENLine div {
+        background-color: green;
+        color: #fff
+      }
+
+      body div.BLUELine div {
+        background-color: #30a7fa;
+        color: #fff
+      }
+    </style>
   </head>
   <body>
     <noscript>

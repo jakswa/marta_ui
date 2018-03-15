@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './StationPills.css';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 
