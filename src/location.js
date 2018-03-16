@@ -18,7 +18,10 @@ export default class Location {
         return;
       }
       window.navigator.geolocation.getCurrentPosition((loc) => {
-        cached = JSON.stringify({ latitude: loc.coords.latitude, longitude: loc.coords.longitude })
+        cached = JSON.stringify({
+          latitude: loc.coords.latitude,
+          longitude: loc.coords.longitude
+        });
         window.sessionStorage.setItem("locationSuccess", cached);
         resolve(loc.coords);
       }, (err) => {

@@ -20,7 +20,7 @@ class StationList extends Component {
     super(props);
     this.state = {
       stationNames: Stations.NAMES.slice(0),
-      location: Location.cachedLocation()
+      location: Location.getLocation()
     };
     this.subscribeCallback = (arrivals) => {
       this.setState({ arrivals: StationList.byStation(arrivals) });
@@ -38,6 +38,7 @@ class StationList extends Component {
       if (!station[arr.DIRECTION]) {
         station[arr.DIRECTION] = {
           time: arr.WAITING_SECONDS,
+          desc: arr.WAITING_TIME,
           id: arr.TRAIN_ID,
           line: arr.LINE
         };
@@ -129,7 +130,7 @@ class StationList extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Hidden xsUp={this.state.arrivals}><LinearProgress /> </Hidden>
+        <Hidden xsUp={!!this.state.arrivals}><LinearProgress /> </Hidden>
         <List className="StationList">{list}</List>
       </div>
     );
@@ -142,7 +143,7 @@ class StationList extends Component {
       var dir = StationList.dirs[i];
       var d = arrivalData[dir];
       if (!d) continue;
-      res.push(<StationPills key={dir + d.line} dir={dir} time={d.time} line={d.line} />);
+      res.push(<StationPills key={dir + d.line} dir={dir} desc={d.desc} time={d.time} line={d.line} />);
     }
     return res;
   }
