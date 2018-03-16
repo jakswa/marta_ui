@@ -10,6 +10,7 @@
 //
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UpdateNotify from './UpdateNotify/UpdateNotify';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -69,8 +70,7 @@ function registerValidSW(swUrl) {
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
               console.log('New content is available; please refresh.');
-              var ele = React.createElement("UpdateNotify");
-              ReactDOM.render(ele, document.getElementById('update-notify'));
+              renderUpdateNotify();
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
@@ -85,6 +85,13 @@ function registerValidSW(swUrl) {
       console.error('Error during service worker registration:', error);
     });
 }
+
+function renderUpdateNotify() {
+  ReactDOM.render(<UpdateNotify />, document.getElementById('update-notify'));
+}
+
+// for testing look of "refresh to update" notification
+// setTimeout(renderUpdateNotify, 3000);
 
 function checkValidServiceWorker(swUrl) {
   // Check if the service worker can be found. If it can't reload the page.
