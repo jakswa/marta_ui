@@ -12,16 +12,19 @@ import Hidden from 'material-ui/Hidden';
 import { LinearProgress, CircularProgress } from 'material-ui/Progress';
 import Typography from 'material-ui/Typography';
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
+import StarredStations from '../StarredStations/StarredStations';
 
 class StationList extends Component {
-  static arrivals = {};
   static dirs = ['N', 'S', 'W', 'E'];
   constructor(props) {
     super(props);
     this.state = {
+      starredStations: StarredStations.stars(),
       stationNames: Stations.NAMES.slice(0),
-      location: Location.getLocation()
+      arrivals: StationList.byStation(Api.arrivals || []),
+      location: Location.cachedLocation()
     };
+
     this.subscribeCallback = (arrivals) => {
       this.setState({ arrivals: StationList.byStation(arrivals) });
     };
@@ -48,7 +51,7 @@ class StationList extends Component {
   }
 
   componentDidMount() {
-    Api.subscribe(this.subscribeCallback);
+    Api.subscribe(this.subscribeCallback, !!this.state.arrivals);
   }
 
   componentWillUnmount() {
@@ -76,6 +79,21 @@ class StationList extends Component {
   render() {
     var list = [];
 
+    if (this.state.starredStations.length) {
+      list.push(<ListSubheader key="starHead" disableSticky>Starred Stations</ListSubheader>);
+
+      for(var i = 0; i < this.state.starredStations.length; i++) {
+        var stationName = this.state.starredStations[i];
+        var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
+        list.push(
+          <ListItem divider key={"star-" + stationName} component={Link} to={"/station/" + stationName.replace(/ /g, '-')}>
+            <ListItemText primary={stationName.replace(/ station$/i, '')} />
+            {this.renderPills(arrivalData)}
+          </ListItem>
+        );
+      }
+    }
+
     if(!this.state.location && !this.state.locFailed) {
       list.push(
         <ListItem key="locReq">
@@ -96,9 +114,9 @@ class StationList extends Component {
       );
 
       list.push(<ListSubheader key="nearHead" disableSticky>Nearest Stations</ListSubheader>);
-      for(var i = 0; i < 3; i++) {
-        var stationName = nearest[i];
-        var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
+      for(i = 0; i < 3; i++) {
+        stationName = nearest[i];
+        arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
         list.push(
           <ListItem divider key={"loc-" + stationName} component={Link} to={"/station/" + stationName.replace(/ /g, '-')}>
             <ListItemText primary={stationName.replace(/ station$/i, '')} />

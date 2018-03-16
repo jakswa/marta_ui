@@ -7,7 +7,7 @@ class Api {
   static lastFetched = new Date();
   static TRAINS_URL = '//salty-brushlands-11905.herokuapp.com/api/trains';
 
-  static subscribe(callback) {
+  static subscribe(callback, noInitialFire) {
     if(this.subscriptions.indexOf(callback) === -1) {
       this.subscriptions.push(callback);
       if(this.subscriptions.length === 1 && !this.arrivals) {
@@ -17,7 +17,7 @@ class Api {
     }
 
     // initial fire, if already cached
-    if(this.arrivals) {
+    if(this.arrivals && !noInitialFire) {
       callback(this.arrivals);
     }
   }
