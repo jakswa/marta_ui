@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import Api from '../marta/api';
+import StarredStations from "../StarredStations/StarredStations";
 import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 
 class StationView extends Component {
@@ -15,6 +18,7 @@ class StationView extends Component {
     this.state = {
       stationName: name,
       upperStationName: name.toUpperCase(),
+      starred: StarredStations.isStarred(name),
       arrivals: []
     };
   }
@@ -37,11 +41,21 @@ class StationView extends Component {
     Api.unsubscribe(this.subscribeCallback);
   }
 
+  toggleStar() {
+    StarredStations.toggle(this.state.stationName);
+    this.setState({ starred: !this.state.starred });
+  }
+
+  starIcon() {
+    return this.state.starred ? 'star' : 'star_border';
+  }
+
   render() {
     return (
       <div className="StationView">
         <AppBar position="static" color="default">
           <Toolbar>
+            <IconButton onClick={this.toggleStar.bind(this)}><Icon>{this.starIcon()}</Icon></IconButton>
             <Typography variant="title" color="inherit">
               {this.state.stationName}
             </Typography>
