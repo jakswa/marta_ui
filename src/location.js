@@ -1,8 +1,4 @@
 export default class Location {
-  static locationAvailable() {
-    return !!window.sessionStorage.getItem("locationSuccess");
-  }
-
   static cachedLocation() {
     var cached = window.sessionStorage.getItem("locationSuccess");
     if (cached) {

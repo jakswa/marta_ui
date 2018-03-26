@@ -33,6 +33,8 @@ class Api {
       .then(res => res.json())
       .then(list => {
         this.arrivals = list;
+        // clear cached values
+        this._arrivalsByStation = null;
         this.fireSubs();
       });
     // this.arrivals = stub;
@@ -42,6 +44,35 @@ class Api {
       this.fetchTrains();
     }, 11000);
   }
+
+  static arrivalsByStation() {
+    if (this._arrivalsByStation) {
+      return this._arrivalsByStation;
+    }
+    this._arrivalsByStation = this.buildByStation(this.arrivals || []);
+    return this._arrivalsByStation;
+  }
+
+  static buildByStation(arrivals) {
+    var byStation = {};
+    for(let i = 0; i < arrivals.length; i++) {
+      var arr = arrivals[i];
+      var station = byStation[arr.STATION];
+      if (!station) {
+        station = byStation[arr.STATION] = {};
+      }
+      if (!station[arr.DIRECTION]) {
+        station[arr.DIRECTION] = {
+          time: arr.WAITING_SECONDS,
+          desc: arr.WAITING_TIME,
+          id: arr.TRAIN_ID,
+          line: arr.LINE
+        };
+      }
+    }
+    return byStation;
+  }
+
 
   static fireSubs() {
     this.subscriptions.forEach((sub) => sub(this.arrivals));

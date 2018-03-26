@@ -34,13 +34,6 @@
         font-family: sans-serif
       }
 
-      .StationList h3 {
-        text-transform: capitalize;
-        white-space: nowrap;
-        -o-text-overflow: ellipsis;
-        text-overflow: ellipsis
-      }
-
       .StationView h2 {
         text-transform: capitalize
       }
@@ -96,6 +89,35 @@
         position: fixed;
         left: 10px;
         bottom: 10px;
+      }
+
+      .StationListHolder h3 {
+        text-transform: capitalize;
+        white-space: nowrap;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis
+      }
+
+      ul.StationListHolder {
+        padding: 0;
+      }
+
+      .StationListHolder > li {
+        padding-right: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+      }
+
+      .StationListHolder > li:nth-child(n+2) {
+        padding-top: 0;
+      }
+
+      .StationListHolder ul {
+        width: 100%;
+        padding: 0;
+      }
+      .StationListHolder ul > li {
+        background-color: #f6f6f6;
       }
     </style>
   </head>

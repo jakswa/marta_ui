@@ -1,4 +1,5 @@
 {
+  "DIRS": ["N", "S", "W", "E"],
   "NAMES": [
     "airport station", "arts center station", "ashby station",
     "avondale station", "bankhead station", "brookhaven station",
