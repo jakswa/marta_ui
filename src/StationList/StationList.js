@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import Paper from 'material-ui/Paper';
 import List from 'material-ui/List';
 import StarredStations from '../StarredStations/StarredStations';
 import NearbyStations from '../NearbyStations/NearbyStations';
@@ -25,6 +26,11 @@ class StationList extends Component {
           </Toolbar>
         </AppBar>
         <List className="StationListHolder">{list}</List>
+        <Paper elevation={0} style={{padding: '16px'}}>
+            <Typography color="inherit">
+              Made by Jake Swanson
+            </Typography>
+        </Paper>
       </div>
     );
   }
