@@ -18,7 +18,7 @@ class StationList extends Component {
 
     return (
       <div className="StationList">
-        <AppBar position="static" color="default">
+        <AppBar position="static" style={{backgroundColor: '#607D8B'}} elevation={0}>
           <Toolbar>
             <Typography variant="title" color="inherit">
               Stations
@@ -26,7 +26,7 @@ class StationList extends Component {
           </Toolbar>
         </AppBar>
         <List className="StationListHolder">{list}</List>
-        <Paper elevation={0} style={{padding: '16px'}}>
+        <Paper elevation={0} style={{color: 'white', backgroundColor: '#546E7A', padding: '16px'}}>
             <Typography color="inherit">
               Made by Jake Swanson
             </Typography>

@@ -38,7 +38,7 @@ class StationView extends Component {
   render() {
     return (
       <div className="TrainView">
-        <AppBar position="static" color="default">
+        <AppBar position="static" style={{backgroundColor: '#607D8B'}} elevation={0}>
           <Toolbar>
             <Typography variant="title" color="inherit">
               Train ID {this.state.trainID}

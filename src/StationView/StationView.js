@@ -53,7 +53,7 @@ class StationView extends Component {
   render() {
     return (
       <div className="StationView">
-        <AppBar position="static" color="default">
+        <AppBar position="static" style={{backgroundColor: '#607D8B'}} elevation={0}>
           <Toolbar>
             <IconButton onClick={this.toggleStar.bind(this)}><Icon>{this.starIcon()}</Icon></IconButton>
             <Typography variant="title" color="inherit">
