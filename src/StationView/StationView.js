@@ -50,15 +50,20 @@ class StationView extends Component {
     return this.state.starred ? 'star' : 'star_border';
   }
 
+  goBack() {
+    window.history.back();
+  }
+
   render() {
     return (
       <div className="StationView">
         <AppBar position="static" style={{backgroundColor: '#607D8B'}} elevation={0}>
           <Toolbar>
-            <IconButton onClick={this.toggleStar.bind(this)}><Icon>{this.starIcon()}</Icon></IconButton>
+            <IconButton onClick={this.goBack} color="default"><Icon style={{color: 'white'}}>arrow_back</Icon></IconButton>
             <Typography variant="title" color="inherit">
               {this.state.stationName}
             </Typography>
+            <IconButton onClick={this.toggleStar.bind(this)}><Icon style={{color: 'white'}}>{this.starIcon()}</Icon></IconButton>
           </Toolbar>
         </AppBar>
         <List>{this.arrivals()}</List>

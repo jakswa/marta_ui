@@ -5,6 +5,8 @@ import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 
 class StationView extends Component {
@@ -35,11 +37,16 @@ class StationView extends Component {
     Api.unsubscribe(this.subscribeCallback);
   }
 
+  goBack() {
+    window.history.back();
+  }
+
   render() {
     return (
       <div className="TrainView">
         <AppBar position="static" style={{backgroundColor: '#607D8B'}} elevation={0}>
           <Toolbar>
+            <IconButton onClick={this.goBack} color="default"><Icon style={{color: 'white'}}>arrow_back</Icon></IconButton>
             <Typography variant="title" color="inherit">
               Train ID {this.state.trainID}
             </Typography>

@@ -52,7 +52,7 @@ class NearbyStations extends Component {
   render() {
     var list = [];
 
-    list.push(<ListSubheader key="nearHead"><Switch checked={this.state.visible} onClick={this.toggleVisible.bind(this)} /> Nearest Stations</ListSubheader>);
+    list.push(<ListSubheader key="nearHead"><Switch checked={this.state.visible} onClick={this.toggleVisible.bind(this)} />Nearest Stations</ListSubheader>);
 
     if(this.state.location && this.state.visible) {
       var nearest = Marta.stationsNearest(

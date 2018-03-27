@@ -4,6 +4,9 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 import List from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import Icon from 'material-ui/Icon';
+import Button from 'material-ui/Button';
 import StarredStations from '../StarredStations/StarredStations';
 import NearbyStations from '../NearbyStations/NearbyStations';
 import AllStations from '../AllStations/AllStations';
@@ -26,10 +29,16 @@ class StationList extends Component {
           </Toolbar>
         </AppBar>
         <List className="StationListHolder">{list}</List>
-        <Paper elevation={0} style={{color: 'white', backgroundColor: '#546E7A', padding: '16px'}}>
-            <Typography color="inherit">
-              Made by Jake Swanson
-            </Typography>
+        <Paper elevation={0} style={{justifyContent: 'space-around', display: 'flex', backgroundColor: '#CFD8DC', padding: '16px'}}>
+          <Button variant="fab" mini={true} onClick={() => window.location = "https://twitter.com/jakswa"}>
+            <Avatar src="https://s.gravatar.com/avatar/721d6b5c0b5345637b76ea17318a447c?s=80&r=g" />
+          </Button>
+          <Button style={{marginLeft: '16px'}} mini={true} variant="fab" color="secondary" onClick={() => window.location = "https://github.com/jakswa/marta_ui"}>
+            <Icon>code</Icon>
+          </Button>
+          <Button style={{marginLeft: '16px'}} mini={true} variant="fab" onClick={() => window.location = "https://gitter.im/marta_ui/Lobby"}>
+            <Icon>message</Icon>
+          </Button>
         </Paper>
       </div>
     );
