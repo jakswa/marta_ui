@@ -7,12 +7,13 @@
     "college park station", "decatur station", "doraville station",
     "dunwoody station", "east lake station", "east point station",
     "edgewood candler park station", "five points station", "garnett station",
-    "georgia state station", "indian creek station", "inman park station",
-    "kensington station", "king memorial station", "lakewood station",
-    "lenox station", "lindbergh station", "medical center station",
-    "midtown station", "north ave station", "oakland city station",
-    "omni dome station", "peachtree center station", "sandy springs station",
-    "vine city station", "west end station"
+    "georgia state station", "hamilton e holmes station", "indian creek station",
+    "inman park station", "kensington station", "king memorial station",
+    "lakewood station", "lenox station", "lindbergh station",
+    "medical center station", "midtown station", "north ave station",
+    "north springs station", "oakland city station", "omni dome station",
+    "peachtree center station", "sandy springs station", "vine city station",
+    "west end station", "west lake station"
   ],
   "LOCATIONS": {
     "bankhead station":{
@@ -158,6 +159,14 @@
     "north ave station":{
       "latitude":33.771696,
       "longitude":-84.387411
+    },
+    "west lake station":{
+      "latitude": 33.7533436,
+      "longitude": -84.4475581
+    },
+    "hamilton e holmes station": {
+      "latitude": 33.7545107,
+      "longitude": -84.4722046
     }
   }
 }
