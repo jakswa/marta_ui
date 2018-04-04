@@ -5,7 +5,7 @@ class Api {
   static arrivals = null;
   static intervalID = null;
   static lastFetched = new Date();
-  static TRAINS_URL = '//salty-brushlands-11905.herokuapp.com/api/trains';
+  static TRAINS_URL = '//api.marta.io/api/trains';
 
   static subscribe(callback, noInitialFire) {
     if(this.subscriptions.indexOf(callback) === -1) {
