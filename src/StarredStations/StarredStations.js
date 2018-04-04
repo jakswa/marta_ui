@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
+import List, { ListItem, ListSubheader } from 'material-ui/List';
 import Hidden from 'material-ui/Hidden';
 import Api from '../marta/api';
 import Stations from '../marta/stations';
-import StationPills from '../StationPills/StationPills';
-import { Link } from 'react-router-dom';
 import Settings from '../settings';
+import StationListItem from '../StationListItem/StationListItem';
 
 class StarredStations extends Component {
   static _stars = Settings.get('stars') || {};
@@ -75,27 +74,10 @@ class StarredStations extends Component {
     for(var i = 0; i < this.state.starredStations.length; i++) {
       var stationName = this.state.starredStations[i];
       var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
-      list.push(
-        <ListItem divider key={"star-" + stationName} component={Link} to={"/station/" + stationName.replace(/ /g, '-')}>
-          <ListItemText primary={stationName.replace(/ station$/i, '')} />
-          {this.renderPills(arrivalData)}
-        </ListItem>
-      );
+      list.push(StationListItem.render(stationName, arrivalData));
     }
 
     return <Hidden xsUp={!this.state.starredStations.length}><ListItem><List>{list}</List></ListItem></Hidden>;
-  }
-
-  renderPills(arrivalData) {
-    if (!arrivalData) return;
-    var res = [];
-    for(var i = 0; i < 4; i++) {
-      var dir = Stations.DIRS[i];
-      var d = arrivalData[dir];
-      if (!d) continue;
-      res.push(<StationPills key={dir + d.line} dir={dir} desc={d.desc} time={d.time} line={d.line} />);
-    }
-    return res;
   }
 }
 

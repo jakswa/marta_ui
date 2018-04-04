@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
+import List, { ListItem, ListSubheader } from 'material-ui/List';
 import Switch from 'material-ui/Switch';
-import { Link } from 'react-router-dom';
+import StationListItem from '../StationListItem/StationListItem';
 import Marta from '../marta';
 import Api from '../marta/api';
-import Stations from '../marta/stations';
 import Location from '../location';
-import StationPills from '../StationPills/StationPills';
 import Settings from '../settings';
 
 class NearbyStations extends Component {
@@ -63,27 +61,10 @@ class NearbyStations extends Component {
       for(var i = 0; i < 3; i++) {
         var stationName = nearest[i];
         var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
-        list.push(
-          <ListItem divider key={"loc-" + stationName} component={Link} to={"/station/" + stationName.replace(/ /g, '-')}>
-            <ListItemText primary={stationName.replace(/ station$/i, '')} />
-            {this.renderPills(arrivalData)}
-          </ListItem>
-        );
+        list.push(StationListItem.render(stationName, arrivalData));
       }
     }
     return <ListItem><List>{list}</List></ListItem>;
-  }
-
-  renderPills(arrivalData) {
-    if (!arrivalData) return;
-    var res = [];
-    for(var i = 0; i < 4; i++) {
-      var dir = Stations.DIRS[i];
-      var d = arrivalData[dir];
-      if (!d) continue;
-      res.push(<StationPills key={dir + d.line} dir={dir} desc={d.desc} time={d.time} line={d.line} />);
-    }
-    return res;
   }
 }
 

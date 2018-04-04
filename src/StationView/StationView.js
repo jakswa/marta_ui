@@ -72,6 +72,13 @@ class StationView extends Component {
   }
 
   arrivals() {
+    if (this.state.arrivals.length === 0) {
+      return (
+        <ListItem divider key="empty">
+          <ListItemText primary="No data available" />
+        </ListItem>
+      )
+    }
     var res = [];
     for(var i = 0; i < this.state.arrivals.length; i++) {
       var arrival = this.state.arrivals[i];

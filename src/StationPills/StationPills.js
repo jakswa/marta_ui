@@ -3,7 +3,13 @@ import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import Icon from 'material-ui/Icon';
 
+const BLANK_CHIP = <Chip style={{opacity: 0.5}} label="NO DATA" />;
+
 class StationPills extends Component {
+  static blankPills() {
+    return BLANK_CHIP;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
