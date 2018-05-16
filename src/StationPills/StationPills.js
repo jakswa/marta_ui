@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Chip from 'material-ui/Chip';
-import Avatar from 'material-ui/Avatar';
-import Icon from 'material-ui/Icon';
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
+import Icon from '@material-ui/core/Icon';
 
 const BLANK_CHIP = <Chip style={{opacity: 0.5}} label="NO DATA" />;
 

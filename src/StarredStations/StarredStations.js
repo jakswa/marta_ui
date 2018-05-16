@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import List, { ListItem, ListSubheader } from 'material-ui/List';
-import Hidden from 'material-ui/Hidden';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Hidden from '@material-ui/core/Hidden';
 import Api from '../marta/api';
 import Stations from '../marta/stations';
 import Settings from '../settings';

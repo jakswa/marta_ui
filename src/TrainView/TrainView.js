@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Api from '../marta/api';
-import AppBar from 'material-ui/AppBar';
-import Chip from 'material-ui/Chip';
-import Avatar from 'material-ui/Avatar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Icon from 'material-ui/Icon';
-import IconButton from 'material-ui/IconButton';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import AppBar from '@material-ui/core/AppBar';
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 class StationView extends Component {
   constructor(props) {

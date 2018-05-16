@@ -2,7 +2,7 @@ import StationList from './StationList/StationList';
 import StationView from './StationView/StationView';
 import TrainView from './TrainView/TrainView';
 import React from "react";
-import Grid from "material-ui/Grid";
+import Grid from "@material-ui/core/Grid";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const App = () => (
