@@ -35,13 +35,23 @@ class StationPills extends Component {
       return <Icon>train</Icon>;
     } else if(this.state.desc === 'Arrived' || this.state.desc === 'Boarding') {
       return <Icon className="rot90">publish</Icon>;
-    } else {
-      var time = Math.ceil(this.state.time / 60);
-      if (time < 10) {
-        time = "0" + time;
-      }
-      return ':' + time;
     }
+
+    // NOTE: subtracting 30s because it looks like marta adds it to seconds
+    // (pills use the seconds, station/train views use the "1 min" text,
+    // and apparently they differ in their definition? somehow. thanks marta)
+    var time = Math.floor((this.state.time - 30) / 60);
+
+    // in my observations, "Arriving" appears at 90s mark (1min + 30s!)
+    // so this shouldn't happen, but just in case
+    if (time <= 0) {
+      return <Icon>train</Icon>;
+    }
+
+    if (time < 10) {
+      time = "0" + time;
+    }
+    return ':' + time;
   }
 
   render() {
