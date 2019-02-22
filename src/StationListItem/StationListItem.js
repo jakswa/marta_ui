@@ -10,7 +10,7 @@ class StationListItem {
     let link = "/station/" + stationName.replace(/ /g, '-');
     return (
       <ListItem divider key={stationName} component={Link} to={link}>
-        <ListItemText primary={stationName.replace(/ station$/i, '')} />
+        <ListItemText className="station-list-title" primary={stationName.replace(/ station$/i, '')} />
         {this.renderPills(arrivalData)}
       </ListItem>
     );
