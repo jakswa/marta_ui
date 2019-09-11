@@ -10,37 +10,17 @@ class StationPills extends Component {
     return BLANK_CHIP;
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      dir: props.dir,
-      line: props.line,
-      desc: props.desc,
-      time: props.time
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    var updates = {};
-    for(var i in nextProps) {
-      if(this.state[i] !== nextProps[i]) {
-        updates[i] = nextProps[i];
-      }
-    }
-    this.setState(updates);
-  }
-
   timeDisplay() {
-    if (this.state.desc.indexOf('Arriving') === 0) {
+    if (this.props.desc.indexOf('Arriving') === 0) {
       return <Icon>train</Icon>;
-    } else if(this.state.desc === 'Arrived' || this.state.desc === 'Boarding') {
+    } else if(this.props.desc === 'Arrived' || this.props.desc === 'Boarding') {
       return <Icon className="rot90">publish</Icon>;
     }
 
     // NOTE: subtracting 30s because it looks like marta adds it to seconds
     // (pills use the seconds, station/train views use the "1 min" text,
     // and apparently they differ in their definition? somehow. thanks marta)
-    var time = Math.floor((this.state.time - 30) / 60);
+    var time = Math.floor((this.props.time - 30) / 60);
 
     // in my observations, "Arriving" appears at 90s mark (1min + 30s!)
     // so this shouldn't happen, but just in case
@@ -55,8 +35,8 @@ class StationPills extends Component {
   }
 
   render() {
-    var className = this.state.line + 'Line Pill';
-    return <Chip classes={{root: className}} avatar={<Avatar>{this.state.dir}</Avatar>} label={this.timeDisplay()} />;
+    var className = this.props.line + 'Line Pill';
+    return <Chip classes={{root: className}} avatar={<Avatar>{this.props.dir}</Avatar>} label={this.timeDisplay()} />;
   }
 }
 
