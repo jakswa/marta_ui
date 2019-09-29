@@ -3,7 +3,7 @@
 [![Join the chat at https://gitter.im/marta_ui/Lobby](https://badges.gitter.im/marta_ui/Lobby.svg)](https://gitter.im/marta_ui/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The static front-end for marta.io, currently running
-on: https://beta.marta.io
+on: https://marta.io
 
 ![beta_marta_io](https://user-images.githubusercontent.com/137793/36806617-90d660b2-1c8e-11e8-8e38-6e4327a9458a.png)
 
