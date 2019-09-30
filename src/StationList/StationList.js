@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import Avatar from '@material-ui/core/Avatar';
@@ -12,7 +9,9 @@ import NearbyStations from '../NearbyStations/NearbyStations';
 import AllStations from '../AllStations/AllStations';
 
 class StationList extends Component {
+
   render() {
+   const { theme } = this.props
     var list = [];
 
     list.push(<StarredStations key="starredStations" />);
@@ -21,15 +20,8 @@ class StationList extends Component {
 
     return (
       <div className="StationList">
-        <AppBar position="static" style={{backgroundColor: '#607D8B'}} elevation={0}>
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              Stations
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <List className="StationListHolder">{list}</List>
-        <Paper elevation={0} style={{justifyContent: 'space-around', display: 'flex', backgroundColor: '#CFD8DC', padding: '16px'}}>
+        <List className={theme === 'light' ? 'StationListHolder StationListHolder--light' : 'StationListHolder StationListHolder--dark'}>{list}</List>
+        <Paper elevation={0} style={{justifyContent: 'space-around', display: 'flex', padding: '16px'}}>
           <Button variant="fab" mini={true} onClick={() => window.location = "https://twitter.com/jakswa"}>
             <Avatar src="https://s.gravatar.com/avatar/721d6b5c0b5345637b76ea17318a447c?s=80&r=g" />
           </Button>
