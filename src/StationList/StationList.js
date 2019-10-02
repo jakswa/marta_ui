@@ -17,19 +17,12 @@ import AllStations from '../AllStations/AllStations';
 
 class StationList extends Component {
 
+  themeAwareClass(className) {
+    return `${className} ${className}--${this.props.theme}`;
+  }
+
   render() {
     const { theme, toggleTheme } = this.props // passing theme and function for toggling different themes
-
-    // Function for changing theme
-    const handleChange = event => {
-      toggleTheme(!theme)
-    }
-
-    // Function for Capitalization of first letter in string
-    const capitalizeFirstLetter = (string) => {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
 
     var list = [];
     list.push(<StarredStations key="starredStations" />);
@@ -46,16 +39,16 @@ class StationList extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <List className={theme === 'light' ? 'StationListHolder StationListHolder--light' : 'StationListHolder StationListHolder--dark'}>{list}</List>
+        <List className={this.themeAwareClass('StationListHolder')}>{list}</List>
         <Paper elevation={0} style={{ justifyContent: 'space-around', display: 'flex', padding: '16px' }}>
-          <div className={theme === 'light' ? 'StationListTheme-text--light' : 'StationListTheme-text--dark'}>{`${capitalizeFirstLetter(theme)} Mode`}<Switch onChange={handleChange} /></div>
+          <div className={this.themeAwareClass('StationListTheme-text')}><Switch checked={this.props.theme === 'dark'} onChange={toggleTheme} />Dark Theme</div>
           <Button variant="fab" mini={true} onClick={() => window.location = "https://twitter.com/jakswa"}>
             <Avatar src="https://s.gravatar.com/avatar/721d6b5c0b5345637b76ea17318a447c?s=80&r=g" />
           </Button>
           <Button style={{ marginLeft: '16px' }} mini={true} variant="fab" color="secondary" onClick={() => window.location = "https://github.com/jakswa/marta_ui"}>
             <Icon>code</Icon>
           </Button>
-          <Button style={{ marginLeft: '16px' }} mini={true} variant="fab" onClick={() => window.location = "https://gitter.im/marta_ui/Lobby"}>
+          <Button style={{ marginLeft: '16px' }} mini={true} variant="fab" color="secondary" onClick={() => window.location = "https://gitter.im/marta_ui/Lobby"}>
             <Icon>message</Icon>
           </Button>
         </Paper>
