@@ -46,7 +46,7 @@ class StationView extends Component {
   render() {
     return (
       <div className="TrainView">
-        <AppBar position="static" style={{backgroundColor: '#607D8B'}} elevation={0}>
+        <AppBar position="static" color="primary" elevation={0}>
           <Toolbar>
             <IconButton onClick={this.goBack} color="default"><Icon style={{color: 'white'}}>arrow_back</Icon></IconButton>
             <Typography variant="title" color="inherit">
