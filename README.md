@@ -22,7 +22,7 @@ that only serves to proxy API results for us (w/ 10s cache).
 ## S3 Deployment
 
 0. Setup AWS credentials and CLI if you haven't.
-1. `npm build`
+1. `npm run-script build`
 2. sync cache-worthy assets: `aws s3 sync build/ s3://your_bucket --exclude service-worker.js,index.html`
 2. cp cache-excluded assets:
  - `aws s3 cp build/index.html s3://your_bucket --cache-control max-age=0`
