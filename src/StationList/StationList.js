@@ -31,7 +31,7 @@ class StationList extends Component {
 
     return (
 
-      <div className="StationList">
+      <div className={this.themeAwareClass('StationList')} >
         <AppBar position="static" color="primary" elevation={0} >
           <Toolbar>
             <Typography variant="title" color="inherit">
@@ -40,7 +40,7 @@ class StationList extends Component {
           </Toolbar>
         </AppBar>
         <List className={this.themeAwareClass('StationListHolder')}>{list}</List>
-        <Paper elevation={0} style={{ justifyContent: 'space-around', display: 'flex', padding: '16px' }}>
+        <Paper className="bottom-links" elevation={0} style={{ justifyContent: 'space-around', display: 'flex', padding: '16px' }}>
           <div className={this.themeAwareClass('StationListTheme-text')}><Switch checked={this.props.theme === 'dark'} onChange={toggleTheme} />Dark Theme</div>
           <Button variant="fab" mini={true} onClick={() => window.location = "https://twitter.com/jakswa"}>
             <Avatar src="https://s.gravatar.com/avatar/721d6b5c0b5345637b76ea17318a447c?s=80&r=g" />
