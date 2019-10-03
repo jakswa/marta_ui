@@ -61,11 +61,12 @@
       div.Pill span {
         font-weight: 700;
         font-size: 1rem;
+        padding-left: 6px;
+        box-sizing: content-box;
       }
 
       div.Pill span.material-icons {
         font-size: 1.1rem;
-        color: #222;
       }
 
       .rot90 {
@@ -100,6 +101,18 @@
         bottom: 10px;
       }
 
+      .StationList--light .bottom-links {
+        background-color: rgb(207, 216, 220);
+      }
+      
+      /*-- muting some of the colors in Dark Mode --*/
+      .StationList--dark div.Pill > span {
+        opacity: 0.75;
+      }
+      .StationList--dark div.Pill > div {
+        opacity: 0.75;
+      }
+
       .StationListHolder .station-list-title {
         text-transform: capitalize;
         white-space: nowrap;
@@ -125,6 +138,9 @@
       }
       .StationListHolder--dark ul > li {
         background-color: #212121;
+      }
+      .StationListTheme-text {
+        text-transform: capitalize;
       }
       .StationListTheme-text--dark {
         color: #fff;
