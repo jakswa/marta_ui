@@ -8,6 +8,11 @@
       "type": "image/png"
     },
     {
+      "src": "icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
       "src": "marta_touch_aw.png",
       "sizes": "152x152",
       "type": "image/png"
