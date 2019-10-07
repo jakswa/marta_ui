@@ -22,14 +22,16 @@ class App extends Component {
     return (
       <Router>
         <MuiThemeProvider theme={ThemeManager.cachedTheme()}>
-          <CssBaseline />
-          <Grid container justify="center" spacing={0}>
-            <Grid item xs={12} xl={4}>
-              <Route exact path="/" component={StationList} />
-              <Route path="/station/:station" component={StationView} />
-              <Route path="/train/:train_id" component={TrainView} />
+          <div className={ThemeManager.current()}>
+            <CssBaseline />
+            <Grid container justify="center" spacing={0}>
+              <Grid item xs={12} xl={4}>
+                <Route exact path="/" component={StationList} />
+                <Route path="/station/:station" component={StationView} />
+                <Route path="/train/:train_id" component={TrainView} />
+              </Grid>
             </Grid>
-          </Grid>
+          </div>
         </MuiThemeProvider>
       </Router>
     )

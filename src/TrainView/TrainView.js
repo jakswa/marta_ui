@@ -73,7 +73,7 @@ class StationView extends Component {
       var className = arrival.LINE + "Line";
       res.push(
         <ListItem divider key={arrival.STATION}>
-          <Chip classes={{ root: className }}  avatar={<Avatar>{arrival.DIRECTION}</Avatar>} label={arrival.STATION.replace(/ station$/i, '')} />
+          <Chip classes={{ root: className }} avatar={<Avatar classes={{ root: 'badge' }}>{arrival.DIRECTION}</Avatar>} label={arrival.STATION.replace(/ station$/i, '')} />
           <ListItemText primary={arrival.WAITING_TIME} />
         </ListItem>
       );
