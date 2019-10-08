@@ -6,8 +6,8 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 // CSS
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import AppThemeOptions from './theme/theme'
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import ThemeManager from './theme/manager';
 import { CssBaseline } from '@material-ui/core';
 
 
@@ -18,26 +18,14 @@ class App extends Component {
     this.state = { darkTheme: Settings.get('darkTheme') };
   }
 
-  theme() {
-    return this.state.darkTheme ? 'dark' : 'light';
-  }
-
   render() {
-    const toggleTheme = () => {
-      Settings.toggle('darkTheme');
-      this.setState({ darkTheme: Settings.get('darkTheme') });
-    }
-
-    const theme = this.theme();
-    const themeOpts = AppThemeOptions[theme];
-
     return (
       <Router>
-        <MuiThemeProvider theme={createMuiTheme(themeOpts)}>
+        <MuiThemeProvider theme={ThemeManager.cachedTheme()}>
           <CssBaseline />
           <Grid container justify="center" spacing={0}>
             <Grid item xs={12} xl={4}>
-              <Route exact path="/" render={() => <StationList theme={theme} toggleTheme={toggleTheme} />} />
+              <Route exact path="/" component={StationList} />
               <Route path="/station/:station" component={StationView} />
               <Route path="/train/:train_id" component={TrainView} />
             </Grid>
