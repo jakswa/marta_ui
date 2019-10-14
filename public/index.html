@@ -49,10 +49,19 @@
         text-transform: capitalize
       }
 
+      .ContainerStationPills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        flex-direction: row;
+        margin-bottom: -5px;
+      }
+
       .Pill {
         margin-left: 5px;
         font-weight: 500;
-        font-family: monospace
+        font-family: monospace !important;
+        margin-bottom: 5px;
       }
 
       .Pill span {
@@ -72,22 +81,22 @@
         top: -2px;
       }
 
-      .GOLDLine .badge {
+      .GOLDLine .Badge {
         background-color: #ffa700;
         color: #fff
       }
 
-      .REDLine .badge {
+      .REDLine .Badge {
         background-color: #ff5100;
         color: #fff
       }
 
-      .GREENLine .badge {
+      .GREENLine .Badge {
         background-color: green;
         color: #fff
       }
 
-      .BLUELine .badge {
+      .BLUELine .Badge {
         background-color: #30a7fa;
         color: #fff
       }
@@ -135,7 +144,7 @@
       }
 
       /*-- muting some of the colors in Dark Mode --*/
-      .dark .badge {
+      .dark .Badge {
         opacity: 0.75;
       }
 

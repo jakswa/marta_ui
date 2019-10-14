@@ -36,7 +36,7 @@ class StationPills extends Component {
 
   render() {
     var className = this.props.line + 'Line Pill';
-    return <Chip classes={{root: className}} avatar={<Avatar classes={{root: 'badge'}}>{this.props.dir}</Avatar>} label={this.timeDisplay()} />;
+    return <Chip classes={{root: className}} avatar={<Avatar classes={{root: 'Badge'}}>{this.props.dir}</Avatar>} label={this.timeDisplay()} />;
   }
 }
 

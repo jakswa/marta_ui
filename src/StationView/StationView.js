@@ -87,8 +87,7 @@ class StationView extends Component {
       var className = arrival.LINE + "Line";
       res.push(
         <ListItem divider key={arrival.TRAIN_ID} component={Link} to={"/train/" + arrival.TRAIN_ID}>
-          {/* apply theme opacity to these chips too, consolidate this css */}
-          <Chip classes={{ root: className }} avatar={<Avatar classes={{ root: 'badge' }}>{arrival.DIRECTION}</Avatar>} label={arrival.DESTINATION} />
+          <Chip classes={{ root: className }} avatar={<Avatar classes={{ root: 'Badge' }}>{arrival.DIRECTION}</Avatar>} label={arrival.DESTINATION} />
           <ListItemText primary={arrival.WAITING_TIME} />
         </ListItem>
       );
