@@ -11,7 +11,7 @@ class StationListItem {
     const arrivals = this.arrivalsByDirection(arrivalData, stationName);
 
     return (
-      <ListItem divider key={stationName} component={Link} to={link}>
+      <ListItem divider button key={stationName} component={Link} to={link}>
         <ListItemText className="station-list-title" primary={stationName.replace(/ station$/i, '')} />
         <div className="ContainerStationPills">{this.renderPills(arrivals)}</div>
       </ListItem>

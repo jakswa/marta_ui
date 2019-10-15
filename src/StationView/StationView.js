@@ -62,7 +62,7 @@ class StationView extends Component {
         <AppBar position="static" color='primary' elevation={0}>
           <Toolbar>
             <IconButton onClick={this.goBack} color="default"><Icon style={{color: 'white'}}>arrow_back</Icon></IconButton>
-            <Typography variant="title" color="inherit">
+            <Typography variant="h6" color="inherit">
               {this.state.stationName}
             </Typography>
             <IconButton onClick={this.toggleStar.bind(this)}><Icon style={{color: 'white'}}>{this.starIcon()}</Icon></IconButton>
@@ -86,7 +86,7 @@ class StationView extends Component {
       var arrival = this.state.arrivals[i];
       var className = arrival.LINE + "Line";
       res.push(
-        <ListItem divider key={arrival.TRAIN_ID} component={Link} to={"/train/" + arrival.TRAIN_ID}>
+        <ListItem button divider key={arrival.TRAIN_ID} component={Link} to={"/train/" + arrival.TRAIN_ID}>
           <Chip classes={{ root: className }} avatar={<Avatar className="Badge">{arrival.DIRECTION}</Avatar>} label={arrival.DESTINATION} />
           <ListItemText primary={arrival.WAITING_TIME} />
         </ListItem>

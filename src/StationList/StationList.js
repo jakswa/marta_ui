@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 // Components
 import StarredStations from '../StarredStations/StarredStations';
 import NearbyStations from '../NearbyStations/NearbyStations';
@@ -26,22 +26,22 @@ class StationList extends Component {
       <div className="StationList">
         <AppBar position="static" color="primary" elevation={0} >
           <Toolbar>
-            <Typography variant="title" color="inherit">
+            <Typography variant="h6" color="inherit">
               Stations
             </Typography>
           </Toolbar>
         </AppBar>
         <List className="StationListHolder">{list}</List>
         <Paper className="bottom-links" elevation={0} style={{ justifyContent: 'space-around', display: 'flex', padding: '16px' }}>
-          <Button variant="fab" mini={true} onClick={() => window.location = "https://twitter.com/jakswa"}>
+          <Fab size="small" onClick={() => window.location = "https://twitter.com/jakswa"}>
             <Avatar src="https://s.gravatar.com/avatar/721d6b5c0b5345637b76ea17318a447c?s=80&r=g" />
-          </Button>
-          <Button style={{ marginLeft: '16px' }} mini={true} variant="fab" color="secondary" onClick={() => window.location = "https://github.com/jakswa/marta_ui"}>
+          </Fab>
+          <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" onClick={() => window.location = "https://github.com/jakswa/marta_ui"}>
             <Icon>code</Icon>
-          </Button>
-          <Button style={{ marginLeft: '16px' }} mini={true} variant="fab" color="secondary" onClick={() => window.location = "https://gitter.im/marta_ui/Lobby"}>
+          </Fab>
+          <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" onClick={() => window.location = "https://gitter.im/marta_ui/Lobby"}>
             <Icon>message</Icon>
-          </Button>
+          </Fab>
         </Paper>
       </div>
     );
