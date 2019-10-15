@@ -13,7 +13,7 @@ class StationListItem {
     return (
       <ListItem divider key={stationName} component={Link} to={link}>
         <ListItemText className="station-list-title" primary={stationName.replace(/ station$/i, '')} />
-        {this.renderPills(arrivals)}
+        <div class="ContainerStationPills">{this.renderPills(arrivals)}</div>
       </ListItem>
     );
   }

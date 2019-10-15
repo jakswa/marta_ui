@@ -42,31 +42,36 @@
       body {
         margin: 0;
         padding: 0;
-        font-family: sans-serif
+        font-family: Roboto,Open Sans,Droid,Ubuntu,sans-serif
       }
 
       .StationView h2 {
         text-transform: capitalize
       }
 
-      body {
-        font-family: Roboto,Open Sans,Droid,Ubuntu,sans-serif
+      .ContainerStationPills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        flex-direction: row;
+        margin-bottom: -5px;
       }
 
-      div.Pill {
+      .Pill {
         margin-left: 5px;
         font-weight: 500;
-        font-family: monospace
+        font-family: monospace !important;
+        margin-bottom: 5px;
       }
 
-      div.Pill span {
+      .Pill span {
         font-weight: 700;
         font-size: 1rem;
         padding-left: 6px;
         box-sizing: content-box;
       }
 
-      div.Pill span.material-icons {
+      .Pill span.material-icons {
         font-size: 1.1rem;
       }
 
@@ -76,22 +81,22 @@
         top: -2px;
       }
 
-      body div.GOLDLine div {
+      .GOLDLine .Badge {
         background-color: #ffa700;
         color: #fff
       }
 
-      body div.REDLine div {
+      .REDLine .Badge {
         background-color: #ff5100;
         color: #fff
       }
 
-      body div.GREENLine div {
+      .GREENLine .Badge {
         background-color: green;
         color: #fff
       }
 
-      body div.BLUELine div {
+      .BLUELine .Badge {
         background-color: #30a7fa;
         color: #fff
       }
@@ -100,18 +105,6 @@
         position: fixed;
         left: 10px;
         bottom: 10px;
-      }
-
-      .StationList--light .bottom-links {
-        background-color: rgb(207, 216, 220);
-      }
-
-      /*-- muting some of the colors in Dark Mode --*/
-      .StationList--dark div.Pill > span {
-        opacity: 0.75;
-      }
-      .StationList--dark div.Pill > div {
-        opacity: 0.75;
       }
 
       .StationListHolder .station-list-title {
@@ -134,21 +127,27 @@
         padding: 0;
       }
 
-      .StationListHolder--light ul > li {
+      /* Theme specific styles */
+
+      /* Light */
+      .light .StationListHolder ul > li {
         background-color: #ECEFF1;
       }
-      .StationListHolder--dark ul > li {
+
+      .light .StationList .bottom-links {
+        background-color: rgb(207, 216, 220);
+      }
+
+      /* Dark */
+      .dark .StationListHolder ul > li {
         background-color: #212121;
       }
-      .StationListTheme-text {
-        text-transform: capitalize;
+
+      /*-- muting some of the colors in Dark Mode --*/
+      .dark .Badge {
+        opacity: 0.75;
       }
-      .StationListTheme-text--dark {
-        color: #fff;
-      }
-      .StationListTheme-text--light{
-        color: #212121;
-      }
+
     </style>
   </head>
   <body>

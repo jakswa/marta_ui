@@ -13,14 +13,8 @@ import Button from '@material-ui/core/Button';
 import StarredStations from '../StarredStations/StarredStations';
 import NearbyStations from '../NearbyStations/NearbyStations';
 import AllStations from '../AllStations/AllStations';
-import ThemeManager from '../theme/manager';
 
 class StationList extends Component {
-
-  themeAwareClass(className) {
-    return `${className} ${className}--${ThemeManager.current()}`;
-  }
-
   render() {
     var list = [];
     list.push(<StarredStations key="starredStations" />);
@@ -29,7 +23,7 @@ class StationList extends Component {
 
     return (
 
-      <div className={this.themeAwareClass('StationList')} >
+      <div className="StationList">
         <AppBar position="static" color="primary" elevation={0} >
           <Toolbar>
             <Typography variant="title" color="inherit">
@@ -37,7 +31,7 @@ class StationList extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <List className={this.themeAwareClass('StationListHolder')}>{list}</List>
+        <List className="StationListHolder">{list}</List>
         <Paper className="bottom-links" elevation={0} style={{ justifyContent: 'space-around', display: 'flex', padding: '16px' }}>
           <Button variant="fab" mini={true} onClick={() => window.location = "https://twitter.com/jakswa"}>
             <Avatar src="https://s.gravatar.com/avatar/721d6b5c0b5345637b76ea17318a447c?s=80&r=g" />
