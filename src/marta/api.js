@@ -5,7 +5,7 @@ class Api {
   static arrivals = null;
   static intervalID = null;
   static lastFetched = new Date();
-  static TRAINS_URL = '//queasy-idiotic-calf.gigalixirapp.com/api/trains';
+  static TRAINS_URL = 'https://rust.marta.io/trains';
 
   static subscribe(callback, noInitialFire) {
     if(this.subscriptions.indexOf(callback) === -1) {
