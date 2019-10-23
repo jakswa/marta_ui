@@ -3,7 +3,7 @@ import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 
-const BLANK_CHIP = <Chip style={{opacity: 0.5}} label="NO DATA" />;
+const BLANK_CHIP = <Chip className="BlankChip" style={{opacity: 0.5}} label="NO DATA" />;
 
 class StationPills extends Component {
   static blankPills() {
@@ -36,7 +36,7 @@ class StationPills extends Component {
 
   render() {
     var className = this.props.line + 'Line Pill';
-    return <Chip classes={{root: className}} avatar={<Avatar classes={{root: 'Badge'}}>{this.props.dir}</Avatar>} label={this.timeDisplay()} />;
+    return <Chip classes={{root: className}} avatar={<Avatar className='Badge'>{this.props.dir}</Avatar>} label={this.timeDisplay()} />;
   }
 }
 
