@@ -16,7 +16,7 @@ on: https://marta.io
 4. `npm start`
 
 Typically you need a Marta API key to interact with Marta's API.
-To make this UI simple, I have a [separate repo](https://github.com/jakswa/miotwo)
+To make this UI simple, I have a [separate repo](https://github.com/jakswa/warp_proxy)
 that only serves to proxy API results for us (w/ 10s cache).
 
 ## S3 Deployment
