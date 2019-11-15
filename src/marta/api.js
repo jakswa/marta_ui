@@ -1,55 +1,99 @@
-// const stub = require("./arrivals_stub.json");
+// The interface from which each react component can receive
+// train or bus updates. It would be much less code to just hit
+// these HTTP endpoints a lot, but it's tens of KB each time so I'm
+// putting effort into reducing waste for our mobile friends.
 
 class Api {
-  static subscriptions = [];
-  static arrivals = null;
-  static intervalID = null;
-  static lastFetched = new Date();
-  static TRAINS_URL = 'https://rust.marta.io/trains';
+  static POLL_INTERVAL = 10500; // 10.5s
+  static URLS = {
+    trains: 'https://rust.marta.io/trains',
+    buses: 'https://rust.marta.io/buses'
+  };
 
-  static subscribe(callback, noInitialFire) {
-    if(this.subscriptions.indexOf(callback) === -1) {
-      this.subscriptions.push(callback);
-      if(this.subscriptions.length === 1 && !this.arrivals) {
-        clearTimeout(this.timeoutID); // just in case?
-        this.fetchTrains();
-      }
+  // dataType: 'trains' or 'buses'
+  static subscribe(callback, dataType) {
+    if (!dataType) dataType = 'trains';
+    return this.poller(dataType).subscribe(callback);
+  }
+  static unsubscribe(callback, dataType) {
+    if (!dataType) dataType = 'trains';
+    return this.poller(dataType).unsubscribe(callback);
+  }
+
+  static poller(dataType) {
+    if (!this.pollers) this.pollers = {};
+    if (!this.pollers[dataType]) {
+      this.pollers[dataType] = new Api(dataType);
     }
+    return this.pollers[dataType];
+  }
 
-    // initial fire, if already cached
-    if(this.arrivals && !noInitialFire) {
-      callback(this.arrivals);
+  constructor(dataType) {
+    this.dataType = dataType;
+    this.subscriptions = [];
+  }
+
+  // subscribes to polled data. two cases:
+  // - fresh data already present, add subscriber, give data, and move on
+  // - stale data, first subscriber, restart pool loop
+  subscribe(callback) {
+    this.subscriptions.push(callback);
+
+    if (this.freshData()) {
+      callback(this.data);
+    } else {
+      this.pollLoop()
     }
   }
 
-  static unsubscribe(callback) {
+  freshData() {
+    return this.data && this.lastPolled &&
+      ((new Date()) - this.lastPolled) < Api.POLL_INTERVAL;
+  }
+
+  pollLoop() {
+    if (this.subscriptions.length === 0) {
+      return;
+    }
+
+    this.lastPolled = new Date();
+    fetch(Api.URLS[this.dataType])
+      .then(res => res.json())
+      .then(data => {
+        this.data = data;
+        this._arrivalsByStation = null; // clear cache if exists
+        this.broadcast();
+        this.queuePoll();
+      }).catch(() => { this.queuePoll(); });
+  }
+
+  queuePoll() {
+    this.timeoutID = setTimeout(() => {
+      this.pollLoop();
+    }, Api.POLL_INTERVAL);
+  }
+
+  broadcast() {
+    this.subscriptions.forEach((sub) => sub(this.data));
+  }
+
+  unsubscribe(callback) {
     var ind = this.subscriptions.indexOf(callback);
     if (ind === -1) return;
     this.subscriptions.splice(ind, 1);
   }
 
-  static fetchTrains() {
-    fetch(this.TRAINS_URL)
-      .then(res => res.json())
-      .then(list => {
-        this.arrivals = list;
-        // clear cached values
-        this._arrivalsByStation = null;
-        this.fireSubs();
-      });
-    // this.arrivals = stub;
-    // this.fireSubs();
-
-    this.timeoutID = setTimeout(() => {
-      this.fetchTrains();
-    }, 11000);
+  static arrivalsByStation() {
+    let api = this.poller('trains');
+    if (!api) return {};
+    return api.arrivalsByStation();
   }
 
-  static arrivalsByStation() {
+  arrivalsByStation() {
     if (this._arrivalsByStation) {
       return this._arrivalsByStation;
     }
-    this._arrivalsByStation = this.buildByStation(this.arrivals || []);
+    this._arrivalsByStation = Api.buildByStation(this.data || []);
     return this._arrivalsByStation;
   }
 
@@ -71,11 +115,6 @@ class Api {
       }
     }
     return byStation;
-  }
-
-
-  static fireSubs() {
-    this.subscriptions.forEach((sub) => sub(this.arrivals));
   }
 }
 

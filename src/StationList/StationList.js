@@ -1,5 +1,6 @@
 // npm packages
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 // Material UI
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -33,7 +34,7 @@ class StationList extends Component {
         </AppBar>
         <List className="StationListHolder">{list}</List>
         <Paper className="bottom-links" elevation={0} style={{ justifyContent: 'space-around', display: 'flex', padding: '16px' }}>
-          <Fab size="small" onClick={() => window.location = "https://twitter.com/jakswa"}>
+          <Fab size="small" component={Link} to={'/buses'}>
             <Avatar src="https://s.gravatar.com/avatar/721d6b5c0b5345637b76ea17318a447c?s=80&r=g" />
           </Fab>
           <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" onClick={() => window.location = "https://github.com/jakswa/marta_ui"}>

@@ -61,7 +61,7 @@ class StarredStations extends Component {
   }
 
   componentDidMount() {
-    Api.subscribe(this.subscribeCallback, !!this.state.arrivals);
+    Api.subscribe(this.subscribeCallback, 'trains');
   }
 
   componentWillUnmount() {
