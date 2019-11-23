@@ -8,6 +8,9 @@ const AppThemeOptions = {
       primary: {
         main: '#607D8B',
       },
+      background: {
+        main: '#fff',
+      }
     },
   },
   dark: {
@@ -17,6 +20,9 @@ const AppThemeOptions = {
       primary: {
         main: grey[800],
       },
+      background: {
+        main: '#303030',
+      }
     },
   }
 };
