@@ -1,5 +1,14 @@
 import Stations from "./stations";
 
+const serviceExceptions = [
+  {service_id: 4, date: 20190902, exception_type: 1},
+  {service_id: 5, date: 20190902, exception_type: 2},
+  {service_id: 4, date: 20191128, exception_type: 1},
+  {service_id: 5, date: 20191128, exception_type: 2},
+  {service_id: 4, date: 20191129, exception_type: 1},
+  {service_id: 5, date: 20191129, exception_type: 2}
+]
+
 class Marta {
   static stationsNearest(lat, long) {
     var list = Stations.NAMES.slice(0); // duplicate to mutate
@@ -19,6 +28,38 @@ class Marta {
     });
 
     return list;
+  }
+
+  static serviceId() {
+    let serviceId = this.defaultServiceId();
+
+    // check exceptions
+    const today = this.formatDate(new Date());
+    const exceptions = serviceExceptions.filter(exception => exception.date.toString() === today);
+    if (exceptions.length) {
+
+
+    }
+    return serviceId;
+  }
+
+  // private
+  static defaultServiceId() {
+    const today = new Date();
+    const day = today.getDay();
+    switch(day) {
+      case 6: // Saturday
+        return 3;
+      case 0: // Sunday
+        return 4;
+      default: // weekdays
+        return 5;
+    }
+  }
+
+  static formatDate(date) {
+    // yyyymmdd
+    return (date).toISOString().slice(0,10).replace(/-/g,"");
   }
 }
 

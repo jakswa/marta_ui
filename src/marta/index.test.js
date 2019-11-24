@@ -22,3 +22,25 @@ describe("stationsNearest", () => {
     expect(sorted[sorted.length - 1]).toEqual('airport station');
   });
 });
+
+describe('serviceId', () => {
+  test('when today is not an exception', () => {
+    // jest
+    // .spyOn(global, 'Date')
+    // .mockImplementationOnce(() => new Date('2019-11-24T11:01:58.135Z'));
+
+    expect(Marta.serviceId()).toEqual(4);
+  });
+
+  test('when today is an exception and service is removed', () => {
+
+  });
+
+  test('when today is an exception and service is added', () => {
+
+  });
+
+  test('when today is an exception and service is added and removed', () => {
+
+  });
+})
