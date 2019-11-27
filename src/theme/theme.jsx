@@ -2,6 +2,7 @@ import { grey } from "@material-ui/core/colors";
 
 const AppThemeOptions = {
   light: {
+    spacing: 4,
     palette: {
       type: 'light',
       primary: {
@@ -10,6 +11,7 @@ const AppThemeOptions = {
     },
   },
   dark: {
+    spacing: 4,
     palette: {
       type: 'dark',
       primary: {

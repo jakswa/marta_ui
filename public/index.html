@@ -67,13 +67,6 @@
         margin-bottom: 5px;
       }
 
-      .Pill span {
-        font-weight: 700;
-        font-size: 1rem;
-        padding-left: 6px;
-        box-sizing: content-box;
-      }
-
       .Pill span.material-icons {
         font-size: 1.1rem;
       }
@@ -84,24 +77,31 @@
         top: -2px;
       }
 
+      .ContainerStationPills :not(.BlankChip) .MuiChip-label {
+        font-family: monospace;
+        font-weight: 700;
+        font-size: 1.3rem;
+      }
+
+      .Badge.MuiChip-avatar {
+        color: #fff;
+        font-size: 1.1rem;
+      }
+
       .GOLDLine .Badge {
         background-color: #ffa700;
-        color: #fff
       }
 
       .REDLine .Badge {
         background-color: #ff5100;
-        color: #fff
       }
 
       .GREENLine .Badge {
         background-color: green;
-        color: #fff
       }
 
       .BLUELine .Badge {
         background-color: #30a7fa;
-        color: #fff
       }
 
       #update-notify .update-notify {
