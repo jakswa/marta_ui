@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Box from '@material-ui/core/Box';
 
 class StationView extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class StationView extends Component {
         <AppBar position="static" color='primary' elevation={0}>
           <Toolbar>
             <IconButton onClick={this.goBack} color="default"><Icon style={{color: 'white'}}>arrow_back</Icon></IconButton>
-            <Typography variant="title" color="inherit">
+            <Typography variant="h6" color="inherit">
               {this.state.stationName}
             </Typography>
             <IconButton onClick={this.toggleStar.bind(this)}><Icon style={{color: 'white'}}>{this.starIcon()}</Icon></IconButton>
@@ -86,9 +87,9 @@ class StationView extends Component {
       var arrival = this.state.arrivals[i];
       var className = arrival.LINE + "Line";
       res.push(
-        <ListItem divider key={arrival.TRAIN_ID} component={Link} to={"/train/" + arrival.TRAIN_ID}>
+        <ListItem button divider key={arrival.TRAIN_ID} component={Link} to={"/train/" + arrival.TRAIN_ID}>
           <Chip classes={{ root: className }} avatar={<Avatar className="Badge">{arrival.DIRECTION}</Avatar>} label={arrival.DESTINATION} />
-          <ListItemText primary={arrival.WAITING_TIME} />
+          <Box mx={2}><ListItemText primary={arrival.WAITING_TIME} /></Box>
         </ListItem>
       );
     }

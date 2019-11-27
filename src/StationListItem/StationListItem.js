@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import StationPills from '../StationPills/StationPills';
 import Stations from '../marta/stations';
+import Box from '@material-ui/core/Box'
 
 class StationListItem {
   static render(stationName, arrivalData) {
@@ -11,9 +12,9 @@ class StationListItem {
     const arrivals = this.arrivalsByDirection(arrivalData, stationName);
 
     return (
-      <ListItem divider key={stationName} component={Link} to={link}>
+      <ListItem divider button key={stationName} component={Link} to={link}>
         <ListItemText className="station-list-title" primary={stationName.replace(/ station$/i, '')} />
-        <div className="ContainerStationPills">{this.renderPills(arrivals)}</div>
+        <Box className="ContainerStationPills">{this.renderPills(arrivals)}</Box>
       </ListItem>
     );
   }
