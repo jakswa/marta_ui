@@ -45,6 +45,12 @@
         font-family: Roboto,Open Sans,Droid,Ubuntu,sans-serif
       }
 
+      /* ughhh they changed the list item padding to 8px on latest MUI */
+      #root .MuiListItem-root.MuiListItem-button {
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
       .StationView h6 {
         text-transform: capitalize
       }
@@ -68,24 +74,28 @@
       }
 
       .Pill span.material-icons {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
       }
 
       .rot90 {
         transform: rotate(90deg);
         position: relative;
-        top: -2px;
+        top: -3px;
       }
 
       .ContainerStationPills :not(.BlankChip) .MuiChip-label {
         font-family: monospace;
         font-weight: 700;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
       }
 
-      .Badge.MuiChip-avatar {
+      .MuiChip-root .Badge.MuiChip-avatar {
         color: #fff;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+        width: 32px;
+        height: 32px;
+        margin-top: 0px;
+        margin-left: 0px;
       }
 
       .GOLDLine .Badge {
@@ -153,6 +163,13 @@
 
       .dark .Pill span {
         opacity: 0.75;
+      }
+
+      .Pill span {
+        font-weight: 700;
+        padding-left: 8px;
+        box-sizing: content-box;
+        text-align: center;
       }
 
 
