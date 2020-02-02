@@ -41,7 +41,8 @@ class Api {
 
     if (this.freshData()) {
       callback(this.data);
-    } else {
+    } else if (this.subscriptions.length === 1) {
+      // first subscriber kicks off a pool loop
       this.pollLoop()
     }
   }
