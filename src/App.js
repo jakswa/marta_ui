@@ -2,6 +2,7 @@ import StationList from './StationList/StationList';
 import StationView from './StationView/StationView';
 import TrainView from './TrainView/TrainView';
 import BusView from './BusView';
+import SearchStops from './SearchStops';
 import Settings from './settings';
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
@@ -30,7 +31,8 @@ class App extends Component {
                 <Route exact path="/" component={StationList} />
                 <Route path="/station/:station" component={StationView} />
                 <Route path="/train/:train_id" component={TrainView} />
-                <Route path="/buses" component={BusView} />
+                <Route path="/stops" component={SearchStops} />
+                <Route path="/buses/:stop_name" component={BusView} />
               </Grid>
             </Grid>
           </div>

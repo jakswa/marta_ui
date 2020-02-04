@@ -4,7 +4,10 @@
 // putting effort into reducing waste for our mobile friends.
 
 class Api {
-  static POLL_INTERVAL = 10500; // 10.5s
+  static POLL_INTERVAL = {
+    trains: 10500, // 10.5s
+    buses: 60000, // 30s
+  };
   static URLS = {
     trains: 'https://rust.marta.io/trains',
     buses: 'https://rust.marta.io/buses'
@@ -49,7 +52,12 @@ class Api {
 
   freshData() {
     return this.data && this.lastPolled &&
-      ((new Date()) - this.lastPolled) < Api.POLL_INTERVAL;
+      ((new Date()) - this.lastPolled) < this.pollInterval();
+  }
+
+  pollInterval() {
+    return Api.POLL_INTERVAL[this.dataType] ||
+      Api.POLL_INTERVAL.buses;
   }
 
   pollLoop() {
@@ -71,7 +79,7 @@ class Api {
   queuePoll() {
     this.timeoutID = setTimeout(() => {
       this.pollLoop();
-    }, Api.POLL_INTERVAL);
+    }, this.pollInterval());
   }
 
   broadcast() {
