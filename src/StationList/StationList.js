@@ -33,14 +33,14 @@ class StationList extends Component {
         </AppBar>
         <List className="StationListHolder">{list}</List>
         <Paper className="bottom-links" elevation={0} style={{ justifyContent: 'space-around', display: 'flex', padding: '16px' }}>
-          <Fab size="small" onClick={() => window.location = "https://twitter.com/jakswa"}>
-            <Avatar src="https://s.gravatar.com/avatar/721d6b5c0b5345637b76ea17318a447c?s=80&r=g" />
+          <Fab size="small" color="secondary" onClick={() => window.location = "https://twitter.com/martaservice"}>
+	    <Icon>info</Icon>
           </Fab>
           <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" onClick={() => window.location = "https://github.com/jakswa/marta_ui"}>
             <Icon>code</Icon>
           </Fab>
-          <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" onClick={() => window.location = "https://gitter.im/marta_ui/Lobby"}>
-            <Icon>message</Icon>
+          <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" onClick={() => window.location = "https://discord.gg/yRFmMhUTBW"}>
+            <Icon>forum</Icon>
           </Fab>
         </Paper>
       </div>
