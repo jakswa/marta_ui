@@ -5,7 +5,7 @@ class Api {
   static arrivals = null;
   static intervalID = null;
   static lastFetched = new Date();
-  static TRAINS_URL = 'https://rust.marta.io/trains';
+  static TRAINS_URL = 'https://api.marta.io/trains';
 
   static subscribe(callback, noInitialFire) {
     if(this.subscriptions.indexOf(callback) === -1) {
