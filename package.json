@@ -4,8 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.5.1",
-    "@material-ui/icons": "^4.5.1",
-    "@material-ui/styles": "^4.5.0",
+    "@material-ui/icons": "^4.5.1", "@material-ui/styles": "^4.5.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "jest-matchmedia-mock": "^1.1.0",
@@ -22,7 +21,7 @@
   },
   "browserslist": {
     "production": [
-      "modern"
+      "defaults"
     ],
     "development": [
       "last 1 chrome version",
