@@ -1,11 +1,10 @@
 // npm packages
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 // Components
 import App from './App';
- // Service Worker
-import registerServiceWorker from './registerServiceWorker';
 
 function Root() {
   return (
@@ -15,4 +14,8 @@ function Root() {
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<Root />, rootElement);
-registerServiceWorker();
+serviceWorkerRegistration.register({
+  onUpdate: () => {
+    ReactDOM.render(<UpdateNotify />, document.getElementById('update-notify'));
+  }
+});
