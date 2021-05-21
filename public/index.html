@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48983531-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'UA-48983531-1');
-    </script>
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48983531-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#607D8B">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!--
+    gtag('config', 'UA-48983531-1');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#607D8B">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon_192.png">
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon_192.png">
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -31,157 +32,168 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>marta.io</title>
-    <meta name="description" content="MARTA realtime train dashboard.">
+  <title>marta.io</title>
+  <meta name="description" content="MARTA realtime train dashboard.">
 
-    <!--
+  <!--
       these used to be in components, but there's so little CSS
       that I can't justify a whole HTTP request just to load this little bit
     -->
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Roboto,Open Sans,Droid,Ubuntu,sans-serif
-      }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Roboto, Open Sans, Droid, Ubuntu, sans-serif
+    }
 
-      /* ughhh they changed the list item padding to 8px on latest MUI */
-      #root .MuiListItem-root.MuiListItem-button {
-        padding-top: 12px;
-        padding-bottom: 12px;
-      }
+    /* ughhh they changed the list item padding to 8px on latest MUI */
+    #root .MuiListItem-root.MuiListItem-button {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
 
-      .StationView h6 {
-        text-transform: capitalize
-      }
+    .StationView h6 {
+      text-transform: capitalize
+    }
 
-      .ContainerStationPills {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        flex-direction: row;
-        margin-bottom: -5px;
-      }
+    .ContainerStationPills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex-direction: row;
+      margin-bottom: -5px;
+    }
 
-      .BlankChip {
-        margin-bottom: 5px;
-      }
+    .BlankChip {
+      margin-bottom: 5px;
+    }
 
-      .Pill {
-        margin-left: 5px;
-        font-weight: 500;
-        margin-bottom: 5px;
-      }
+    .Pill {
+      margin-left: 5px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
 
-      .Pill span.material-icons {
-        padding-top: 8px;
-      }
+    .Pill span.material-icons {
+      padding-top: 8px;
+    }
 
-      .rot90 {
-        transform: rotate(90deg);
-        position: relative;
-        left: 4px;
-      }
+    .rot90 {
+      transform: rotate(90deg);
+      position: relative;
+      left: 4px;
+    }
 
-      .ContainerStationPills :not(.BlankChip) .MuiChip-label {
-        font-family: monospace;
-        font-weight: 700;
-        font-size: 1.4rem;
-      }
+    .ContainerStationPills :not(.BlankChip) .MuiChip-label {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
 
-      .MuiChip-root .Badge.MuiChip-avatar {
-        color: #fff;
-        font-size: 1.3rem;
-        width: 32px;
-        height: 32px;
-        margin-top: 0px;
-        margin-left: 0px;
-      }
+    .MuiChip-root .Badge.MuiChip-avatar {
+      color: #fff;
+      font-size: 1.3rem;
+      width: 32px;
+      height: 32px;
+      margin-top: 0px;
+      margin-left: 0px;
+    }
 
-      .GOLDLine .Badge {
-        background-color: #ffa700;
-      }
+    .GOLDLine .Badge,
+    .TrainView ul.gold-line .MuiTimelineSeparator-root span {
+      background-color: #ffa700;
+    }
 
-      .REDLine .Badge {
-        background-color: #ff5100;
-      }
+    .REDLine .Badge,
+    .TrainView ul.red-line .MuiTimelineSeparator-root span {
+      background-color: #ff5100;
+    }
 
-      .GREENLine .Badge {
-        background-color: green;
-      }
+    .GREENLine .Badge,
+    .TrainView ul.green-line .MuiTimelineSeparator-root span {
+      background-color: green;
+    }
 
-      .BLUELine .Badge {
-        background-color: #30a7fa;
-      }
+    .BLUELine .Badge,
+    .TrainView ul.blue-line .MuiTimelineSeparator-root span {
+      background-color: #30a7fa;
+    }
 
-      #update-notify .update-notify {
-        position: fixed;
-        left: 10px;
-        bottom: 10px;
-      }
+    .TrainView {
+      text-transform: capitalize;
+    }
 
-      .StationListHolder .station-list-title {
-        text-transform: capitalize;
-        white-space: nowrap;
-        -o-text-overflow: ellipsis;
-        text-overflow: ellipsis
-      }
+    .TrainView .MuiPaper-root {
+      padding: 6px;
+    }
 
-      ul.StationListHolder {
-        padding: 0;
-      }
+    #update-notify .update-notify {
+      position: fixed;
+      left: 10px;
+      bottom: 10px;
+    }
 
-      .StationListHolder > li {
-        padding: 0;
-      }
+    .StationListHolder .station-list-title {
+      text-transform: capitalize;
+      white-space: nowrap;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis
+    }
 
-      .StationListHolder ul {
-        width: 100%;
-        padding: 0;
-      }
+    ul.StationListHolder {
+      padding: 0;
+    }
 
-      /* Theme specific styles */
+    .StationListHolder>li {
+      padding: 0;
+    }
 
-      /* Light */
-      .light .StationListHolder ul > li {
-        background-color: #ECEFF1;
-      }
+    .StationListHolder ul {
+      width: 100%;
+      padding: 0;
+    }
 
-      .light .StationList .bottom-links {
-        background-color: rgb(207, 216, 220);
-      }
+    /* Theme specific styles */
 
-      /* Dark */
-      .dark .StationListHolder ul > li {
-        background-color: #212121;
-      }
+    /* Light */
+    .light .StationListHolder ul>li {
+      background-color: #ECEFF1;
+    }
 
-      /*-- muting some of the colors in Dark Mode --*/
-      .dark .Badge {
-        opacity: 0.85;
-      }
+    .light .StationList .bottom-links {
+      background-color: rgb(207, 216, 220);
+    }
 
-      .dark .Pill span {
-        opacity: 0.85;
-      }
+    /* Dark */
+    .dark .StationListHolder ul>li {
+      background-color: #212121;
+    }
 
-      .Pill span {
-        font-weight: 700;
-        padding-left: 8px;
-        box-sizing: content-box;
-        text-align: center;
-      }
+    /*-- muting some of the colors in Dark Mode --*/
+    .dark .Badge {
+      opacity: 0.85;
+    }
 
+    .dark .Pill span {
+      opacity: 0.85;
+    }
 
-    </style>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-    <div id="update-notify"></div>
-    <!--
+    .Pill span {
+      font-weight: 700;
+      padding-left: 8px;
+      box-sizing: content-box;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+  <div id="update-notify"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -191,5 +203,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>
