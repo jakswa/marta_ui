@@ -6,9 +6,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
-import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import Fab from '@material-ui/core/Fab';
+import { Link } from 'react-router-dom';
 // Components
 import StarredStations from '../StarredStations/StarredStations';
 import NearbyStations from '../NearbyStations/NearbyStations';
@@ -34,10 +34,10 @@ class StationList extends Component {
         <List className="StationListHolder">{list}</List>
         <Paper className="bottom-links" elevation={0} style={{ justifyContent: 'space-around', display: 'flex', padding: '16px' }}>
           <Fab size="small" color="secondary" onClick={() => window.location = "https://twitter.com/martaservice"}>
-	    <Icon>info</Icon>
+            <Icon>info</Icon>
           </Fab>
-          <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" onClick={() => window.location = "https://github.com/jakswa/marta_ui"}>
-            <Icon>code</Icon>
+          <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" component={Link} to="/bus_routes">
+            <Icon>directions_bus</Icon>
           </Fab>
           <Fab size="small" style={{ marginLeft: '16px' }} color="secondary" onClick={() => window.location = "https://discord.gg/yRFmMhUTBW"}>
             <Icon>forum</Icon>

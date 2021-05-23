@@ -14,14 +14,14 @@ class StarredStations extends Component {
   /*** external api for other components to use ***/
   static stars() {
     var i = [];
-    for(var j in this._stars) {
+    for (var j in this._stars) {
       i.push(j);
     }
     return i;
   }
 
   static isStarred(stationName) {
-   return  !!this._stars[stationName];
+    return !!this._stars[stationName];
   }
 
   static star(stationName) {
@@ -61,7 +61,7 @@ class StarredStations extends Component {
   }
 
   componentDidMount() {
-    Api.subscribe(this.subscribeCallback, !!this.state.arrivals);
+    Api.subscribe(this.subscribeCallback);
   }
 
   componentWillUnmount() {
@@ -73,7 +73,7 @@ class StarredStations extends Component {
 
     list.push(<ListSubheader key="starHead">Starred Stations</ListSubheader>);
 
-    for(var i = 0; i < this.state.starredStations.length; i++) {
+    for (var i = 0; i < this.state.starredStations.length; i++) {
       var stationName = this.state.starredStations[i];
       var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
       list.push(StationListItem.render(stationName, arrivalData));

@@ -40,6 +40,59 @@
       that I can't justify a whole HTTP request just to load this little bit
     -->
   <style>
+    .map-container {
+      height: 400px;
+    }
+
+    .bus-marker {
+      background: black;
+      border-radius: 2px;
+    }
+
+    .bus-marker.old-pos {
+      opacity: 0.2;
+    }
+
+    .bus-marker-early {
+      color: pink;
+    }
+
+    .bus-marker-on-time {
+      color: rgb(0, 255, 0);
+    }
+
+    .bus-marker-late {
+      color: rgb(255, 208, 0);
+    }
+
+    .BusRouteList a .MuiChip-root {
+      margin-right: 5px;
+    }
+
+    .BusRouteList a>.MuiChip-root {
+      margin-right: 10px;
+    }
+
+    .BusRouteList .age-1 .material-icons {
+      opacity: 0.5;
+    }
+
+    .BusRouteList .age-2 .material-icons {
+      opacity: 0.3;
+    }
+
+    .BusRouteList .timely-early .material-icons {
+      color: pink;
+    }
+
+    .BusRouteList .timely-on-time .material-icons {
+      color: rgb(0, 255, 0);
+    }
+
+    .BusRouteList .timely-late .material-icons {
+      color: rgb(255, 208, 0);
+    }
+
     body {
       margin: 0;
       padding: 0;

@@ -30,7 +30,7 @@ class NearbyStations extends Component {
   }
 
   componentDidMount() {
-    Api.subscribe(this.subscribeCallback, !!this.state.arrivals);
+    Api.subscribe(this.subscribeCallback);
   }
 
   componentWillUnmount() {
@@ -40,7 +40,7 @@ class NearbyStations extends Component {
   toggleVisible() {
     Settings.toggle('nearbyVisible');
     // if showing for the first time
-    if(!this.state.visible && !this.state.location) {
+    if (!this.state.visible && !this.state.location) {
       Location.getLocation().then((loc) => {
         this.setState({ location: loc });
       });
@@ -54,13 +54,13 @@ class NearbyStations extends Component {
 
     list.push(<ListSubheader key="nearHead"><Switch checked={this.state.visible} onClick={this.toggleVisible.bind(this)} />Nearest Stations</ListSubheader>);
 
-    if(this.state.location && this.state.visible) {
+    if (this.state.location && this.state.visible) {
       var nearest = Marta.stationsNearest(
         this.state.location.latitude,
         this.state.location.longitude
       );
 
-      for(var i = 0; i < 3; i++) {
+      for (var i = 0; i < 3; i++) {
         var stationName = nearest[i];
         var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
         list.push(StationListItem.render(stationName, arrivalData));

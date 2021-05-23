@@ -23,7 +23,7 @@ class AllStations extends Component {
   }
 
   componentDidMount() {
-    Api.subscribe(this.subscribeCallback, !!this.state.arrivals);
+    Api.subscribe(this.subscribeCallback);
   }
 
   componentWillUnmount() {
@@ -41,7 +41,7 @@ class AllStations extends Component {
 
 
     if (!this.state.hideAll) {
-      for(var i = 0; i < this.state.stationNames.length; i++) {
+      for (var i = 0; i < this.state.stationNames.length; i++) {
         var stationName = this.state.stationNames[i];
         var arrivalData = this.state.arrivals && this.state.arrivals[stationName.toUpperCase()];
         list.push(StationListItem.render(stationName, arrivalData));

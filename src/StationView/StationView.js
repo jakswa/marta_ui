@@ -29,13 +29,14 @@ class StationView extends Component {
   componentDidMount() {
     this.subscribeCallback = (arrivals) => {
       var matching = []
-      for(var i = 0; i < arrivals.length; i++) {
+      for (var i = 0; i < arrivals.length; i++) {
         var arrival = arrivals[i];
-        if(arrival.STATION === this.state.upperStationName) {
+        if (arrival.STATION === this.state.upperStationName) {
+          arrival.wsec = parseInt(arrival.WAITING_SECONDS);
           matching.push(arrival);
         }
       }
-      this.setState({ arrivals: matching });
+      this.setState({ arrivals: matching.sort((i, j) => i.wsec < j.wsec ? -1 : 1) });
     };
     Api.subscribe(this.subscribeCallback);
   }
@@ -62,11 +63,11 @@ class StationView extends Component {
       <div className="StationView">
         <AppBar position="static" color='primary' elevation={0}>
           <Toolbar>
-            <IconButton onClick={this.goBack} color="default"><Icon style={{color: 'white'}}>arrow_back</Icon></IconButton>
+            <IconButton onClick={this.goBack} color="default"><Icon style={{ color: 'white' }}>arrow_back</Icon></IconButton>
             <Typography variant="h6" color="inherit">
               {this.state.stationName}
             </Typography>
-            <IconButton onClick={this.toggleStar.bind(this)}><Icon style={{color: 'white'}}>{this.starIcon()}</Icon></IconButton>
+            <IconButton onClick={this.toggleStar.bind(this)}><Icon style={{ color: 'white' }}>{this.starIcon()}</Icon></IconButton>
           </Toolbar>
         </AppBar>
         <List>{this.arrivals()}</List>
@@ -83,7 +84,7 @@ class StationView extends Component {
       )
     }
     var res = [];
-    for(var i = 0; i < this.state.arrivals.length; i++) {
+    for (var i = 0; i < this.state.arrivals.length; i++) {
       var arrival = this.state.arrivals[i];
       var className = arrival.LINE + "Line";
       res.push(

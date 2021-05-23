@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import Api from '../marta/api';
 import AppBar from '@material-ui/core/AppBar';
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Box from '@material-ui/core/Box';
 
 // Timeline reqs
 import Stations from '../marta/stations';
@@ -113,7 +107,7 @@ class StationView extends Component {
 
     if (!stations) {
       return (
-        <TimelineItem>
+        <TimelineItem key="empty">
           <TimelineContent>
             <Typography>No data available</Typography>
           </TimelineContent>
@@ -126,7 +120,7 @@ class StationView extends Component {
       var station = stations[i];
       var arrival = this.state.arrivals.find((arr) => arr.STATION.toLowerCase().indexOf(station) > -1);
       res.push(
-        <TimelineItem>
+        <TimelineItem key={station}>
           <TimelineOppositeContent>
             <Typography>{station}</Typography>
           </TimelineOppositeContent>
