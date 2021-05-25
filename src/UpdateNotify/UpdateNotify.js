@@ -10,8 +10,8 @@ class UpdateNotify extends Component {
     return (
       <Button
         variant="raised"
-        color="secondary"
-        className="update-notify"
+        color="secondary" // not working? adding to className :(
+        className="update-notify MuiFab-secondary"
         onClick={this.refresh.bind(this)}
       >Refresh to Update</Button>
     );

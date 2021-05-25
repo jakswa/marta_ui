@@ -11,6 +11,7 @@ import ThemeManager from './theme/manager';
 import { CssBaseline } from '@material-ui/core';
 
 import BusRouteList from './BusRouteList';
+// only load bus JS if user clicks into it
 const BusView = lazy(() => import('./BusView'));
 
 class App extends Component {
